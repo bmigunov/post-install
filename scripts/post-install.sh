@@ -122,6 +122,14 @@ BLADERF_FX3_2_3_2_IMAGE_PATH="${BLADERF_X40_IMAGES_DIR}/bladeRF_fw-2.3.2.img"
 BLADERF_X40_FPGA_BITSTREAM_0_11_1_PATH=\
 "${BLADERF_X40_IMAGES_DIR}/hostedx40-0.11.1.rbf"
 
+PS_BIOS_REMOTE="http://www.emu-land.net/consoles/psx/bios?act=getfile&id=4986"
+PS2_BIOS_REMOTE="http://www.emu-land.net/consoles/ps2/bios?act=getfile&id=5017"
+
+BRUTAL_DOOM_REMOTE=\
+"https://www.moddb.com/downloads/mirror/95667/123/cf2617048e3641a1d9ee675fd134b7f5"
+
+HAVEN_AND_HEARTH_REMOTE=""
+
 YOUTUBE_DL_PATH=/usr/local/bin/youtube-dl
 YOUTUBE_DL_REMOTE="https://yt-dl.org/downloads/latest/youtube-dl"
 
@@ -1088,12 +1096,31 @@ function bladerf_x40_images_download()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Downloading bladeRF x40 images..."
 
-    wget -q -O "$BLADERF_FX3_IMAGE_LATEST_PATH" "$BLADERF_FX3_IMAGE_LATEST_REMOTE"
-    wget -q -O "$BLADERF_X40_FPGA_BITSTREAM_LATEST_PATH" \
-    "$BLADERF_X40_FPGA_BITSTREAM_LATEST_REMOTE"
-    wget -q -O "$BLADERF_FX3_2_3_2_IMAGE_PATH" "$BLADERF_FX3_2_3_2_IMAGE_REMOTE"
-    wget -q -O "$BLADERF_X40_FPGA_BITSTREAM_0_11_1_PATH" \
-    "$BLADERF_X40_FPGA_BITSTREAM_0_11_1_REMOTE"
+    wget -q -O "${BLADERF_FX3_IMAGE_LATEST_PATH}" \
+         "${BLADERF_FX3_IMAGE_LATEST_REMOTE}"
+    wget -q -O "${BLADERF_X40_FPGA_BITSTREAM_LATEST_PATH}" \
+         "${BLADERF_X40_FPGA_BITSTREAM_LATEST_REMOTE}"
+    wget -q -O "${BLADERF_FX3_2_3_2_IMAGE_PATH}" \
+         "${BLADERF_FX3_2_3_2_IMAGE_REMOTE}"
+    wget -q -O "${BLADERF_X40_FPGA_BITSTREAM_0_11_1_PATH}" \
+    "${BLADERF_X40_FPGA_BITSTREAM_0_11_1_REMOTE}"
+}
+
+function playstation_bios_download()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+    echo "Downloading PSOne and PS2 BIOS images..."
+
+    wget -q -O "${PS_BIOS_IMAGES_DIR}/ps_bios.7z" "${PS_BIOS_REMOTE}"
+    wget -q -O "${PS2_BIOS_IMAGES_DIR}/ps2_bios.7z" "${PS2_BIOS_REMOTE}"
+}
+
+function brutal_doom_download()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+    echo "Downloading Brutal Doom mod..."
+
+    wget -q -O "${GAMES_DIR}/brutal_doom.rar" "${BRUTAL_DOOM_REMOTE}"
 }
 
 function nerd_fonts_install()
@@ -1242,6 +1269,11 @@ bash_histfile_setup
 mpd_setup
 
 bladerf_x40_images_download
+
+if [ $NO_GAMES = 0 ]; then
+    playstation_bios_download
+    brutal_doom_download
+fi
 
 nerd_fonts_install
 
