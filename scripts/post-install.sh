@@ -65,13 +65,8 @@ PERSONAL_VIDEO_DIR="${VIDEO_DIR}"/personal
 SAVED_VIDEO_DIR="${VIDEO_DIR}"/saved
 MOVIES_DIR="${VIDEO_DIR}"/Movies
 SERIES_DIR="${VIDEO_DIR}"/Series
-JOB_SRC_DIR="${WORKSPACE_DIR}"/job/src
 PERSONAL_SRC_DIR="${WORKSPACE_DIR}"/personal/src
-JOB_VAR_DIR="${WORKSPACE_DIR}"/job/var
 PERSONAL_VAR_DIR="${WORKSPACE_DIR}"/personal/var
-JOB_BACKUP_DIR="${JOB_VAR_DIR}"/backup
-JOB_IMAGES_DIR="${JOB_VAR_DIR}"/images
-JOB_LOG_DIR="${JOB_VAR_DIR}"/log
 PERSONAL_BACKUP_DIR="${PERSONAL_VAR_DIR}"/backup
 PERSONAL_IMAGES_DIR="${PERSONAL_VAR_DIR}"/images
 PERSONAL_LOG_DIR="${PERSONAL_VAR_DIR}"/log
@@ -355,14 +350,13 @@ function home_directories_create()
                 "${SCREENSHOTS_DIR}" "${WALLPAPERS_DIR}"                       \
                 "${FINISHED_TORRENTS_DIR}" "${PERSONAL_VIDEO_DIR}"             \
                 "${SAVED_VIDEO_DIR}" "${MOVIES_DIR}" "${SERIES_DIR}"           \
-                "${JOB_SRC_DIR}" "${PERSONAL_SRC_DIR}" "${JOB_VAR_DIR}"        \
-                "${PERSONAL_VAR_DIR}" "${JOB_BACKUP_DIR}" "${JOB_IMAGES_DIR}"  \
-                "${JOB_LOG_DIR}" "${PERSONAL_BACKUP_DIR}"                      \
-                "${PERSONAL_IMAGES_DIR}" "${PERSONAL_LOG_DIR}"                 \
-                "${NES_GAMES_DIR}" "${SEGA_GAMES_DIR}" "${SNES_GAMES_DIR}"     \
-                "${N64_GAMES_DIR}" "${PS_GAMES_DIR}" "${PS2_GAMES_DIR}"        \
-                "${ZXS_GAMES_DIR}" "${DOS_GAMES_DIR}" "${PS_BIOS_IMAGES_DIR}"  \
-                "${PS2_BIOS_IMAGES_DIR}" "${BLADERF_X40_IMAGES_DIR}"
+                "${PERSONAL_SRC_DIR}" "${PERSONAL_VAR_DIR}"                    \
+                "${PERSONAL_BACKUP_DIR}" "${PERSONAL_IMAGES_DIR}"              \
+                "${PERSONAL_LOG_DIR}" "${NES_GAMES_DIR}" "${SEGA_GAMES_DIR}"   \
+                "${SNES_GAMES_DIR}" "${N64_GAMES_DIR}" "${PS_GAMES_DIR}"       \
+                "${PS2_GAMES_DIR}" "${ZXS_GAMES_DIR}" "${DOS_GAMES_DIR}"       \
+                "${PS_BIOS_IMAGES_DIR}" "${PS2_BIOS_IMAGES_DIR}"               \
+                "${BLADERF_X40_IMAGES_DIR}"
 }
 
 function rutracker_hosts_add()
