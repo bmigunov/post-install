@@ -1,0 +1,4 @@
+deb https://download.sublimetext.com/ apt/stable/
+deb [arch=amd64] https://download.docker.com/linux/debian bullseye stable
+deb [signed-by=/usr/share/keyrings/i2p-archive-keyring.gpg] https://deb.i2p2.de/ bullseye main
+deb [arch=amd64 signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main

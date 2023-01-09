@@ -1,0 +1,17 @@
+git@github.com:bmigunov/omp_interview-test_userspace.git
+git@github.com:bmigunov/omp_interview-test_kernel.git
+git@github.com:bolt1502/MOLY.LR9.W1444.MD.LWTG.MP.V88.git
+git@github.com:cia-foundation/TempleOS.git
+git@github.com:ARMmbed/mbedtls.git
+git@github.com:cuberite/polarssl.git
+git@github.com:MusicPlayerDaemon/libmpdclient.git
+git@github.com:MusicPlayerDaemon/MPD.git
+git@github.com:nonpop/xkblayout-state.git
+git@github.com:soimort/translate-shell.git
+git@github.com:Nuand/bladeRF.git
+git@github.com:srsran/srsRAN.git
+git://git.code.sf.net/p/openlte/code
+https://git.kernel.org/pub/scm/network/ofono/ofono.git
+https://git.linaro.org/landing-teams/working/qualcomm/qdl.git
+git@github.com:magicmonty/bash-git-prompt.git
+git@github.com:bmigunov/luxdesk-configs
