@@ -157,11 +157,11 @@ declare -a I3BLOCK_BLOCKLETS=("backlight/backlight" "bandwidth3/bandwidth3" \
 REMOTE_DEB_TMPDIR=/tmp/remote_deb
 
 VIM_DIR=~/.vim
-VIM_BUNDLE_DIR="$VIM_DIR"/bundle
-VIM_PLUGIN_DIR="$VIM_DIR"/plugin
-VIM_COLORS_DIR="$VIM_DIR"/colors
-VIM_DOC_DIR="$VIM_DIR"/doc
-VIM_AUTOLOAD_DIR="$VIM_DIR"/autoload
+VIM_BUNDLE_DIR="${VIM_DIR}"/bundle
+VIM_PLUGIN_DIR="${VIM_DIR}"/plugin
+VIM_COLORS_DIR="${VIM_DIR}"/colors
+VIM_DOC_DIR="${VIM_DIR}"/doc
+VIM_AUTOLOAD_DIR="${VIM_DIR}"/autoload
 
 YCM_REPO_URI="git@github.com:ycm-core/YouCompleteMe.git"
 VIM_PATHOGEN_REPO_URI="git@github.com:tpope/vim-pathogen.git"
@@ -183,7 +183,7 @@ function options_check()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
     while [ true ]; do
-        if [ ${1} = ${LONGOPT_HELP} -o ${1} = ${SHORTOPT_HELP}]; then
+        if [ ${1} = ${LONGOPT_HELP} -o ${1} = ${SHORTOPT_HELP} ]; then
             printf "${USAGE}"
             exit 0
         elif [ ${1} = ${LONGOPT_NO_GAMES} ]; then
@@ -374,7 +374,7 @@ function locale_add()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Adding locale ${1}"
 
-    if ! grep ${1} "${SUPPORTED_LOCALES_PATH}"; then
+    if ! grep "${1}" "${SUPPORTED_LOCALES_PATH}"; then
         echo "locales_setup() warning: '${1}' locale is not supported" | \
         systemd-cat -p warning -t $0
         echo "Warning! '${1}' locale is not supported"
@@ -406,7 +406,7 @@ function apt_repos_add()
     while read -r; do
         echo "Adding repository signing key..."
         sudo add-apt-repository -y "${REPLY}"
-    done <$"{APT_REPOS_LIST_PATH}"
+    done <"${APT_REPOS_LIST_PATH}"
 }
 
 function system_update()
@@ -1221,7 +1221,7 @@ function mime_types_setup()
 tabs 4
 clear
 
-options_check
+options_check "$@"
 os_check
 privileges_check
 prerequisites_install
@@ -1244,7 +1244,7 @@ install_from_archives
 
 youtube_dl_install
 
-if $GITHUB_KEY_RW_TOKEN; then
+if [ -n "${GITHUB_KEY_RW_TOKEN}" ]; then
     ssh-keygen -q -f ~/.ssh/id_rsa -N ${SSH_KEY_PASS}
     ssh_keys_store
 
