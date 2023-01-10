@@ -448,7 +448,7 @@ function apt_setup()
 
     if ! gpg --keyid-format long --import --import-options show-only \
              --with-fingerprint                                      \
-             "${ARCHIVE_KEYRINGS_DIR}"/i2p-archive-keyring.gpg |     \
+             "${ARCHIVE_KEYRINGS_DIR}/i2p-archive-keyring.gpg" |     \
          grep "${I2P_ARCHIVE_KEYRING_KEY_FINGERPRINT}"; then
         echo "Warning! i2p keyring fingerprint mismatch. Removing keyring"
         echo "Warning! i2p keyring fingerprint mismatch. Removing keyring" | \
@@ -577,12 +577,8 @@ function flatpak_packages_install()
     fi
 
     COMMON_LIST=$(dirname "$0")"/../data/flatpak/${PREFIX}common.list"
-    GUI_LIST=$(dirname "$0")"/../data/apt/deb/${PREFIX}gui.list"
-    GAMES_LIST=$(dirname "$0")"/../data/apt/deb/${PREFIX}games.list"
-
-    if [ ${1} ]; then
-        PREFIX="${1}-"
-    fi
+    GUI_LIST=$(dirname "$0")"/../data/flatpak/${PREFIX}gui.list"
+    GAMES_LIST=$(dirname "$0")"/../data/flatpak/${PREFIX}games.list"
 
     while read -r; do
         flatpak install ${REPLY}
