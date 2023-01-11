@@ -442,7 +442,7 @@ function apt_setup()
                   "${ARCHIVE_KEYRING_REMOTE}"
     done
 
-    sudo chmod go+r "${ARCHIVE_KEYRINGS_DIR}"/githubcli-archive-keyring.gpg
+    sudo chmod go+r "${ARCHIVE_KEYRINGS_DIR}/githubcli-archive-keyring.gpg"
 
     if ! gpg --keyid-format long --import --import-options show-only \
              --with-fingerprint                                      \
@@ -632,27 +632,23 @@ function remote_install_from_archive()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Installing from the archive..."
 
-    sudo wget -q -P /opt "${1}"
+    sudo wget -q -O /opt/archive "${1}"
 
-    if file --mime-type /opt/$(basename "${1}") | \
-       grep "${MIME_TYPE_TAR_GZ}"; then
-        sudo tar -C /opt xvfz /opt/$(basename "${1}")
-    elif file --mime-type /opt/$(basename "${1}") | \
-         grep "${MIME_TYPE_TAR_XZ}"; then
-        sudo tar -C /opt xvfJ /opt/$(basename "${1}")
-    elif file --mime-type /opt/$(basename "${1}") | \
-         grep "${MIME_TYPE_TAR_BZ2}"; then
-        sudo tar -C /opt xvfj /opt/$(basename "${1}")
-    elif file --mime-type /opt/$(basename "${1}") | \
-         grep "${MIME_TYPE_ZIP}"; then
-        sudo 7z x -tzip -o/opt /opt/$(basename "${1}")
+    if file --mime-type /opt/archive | grep "${MIME_TYPE_TAR_GZ}"; then
+        sudo tar -v -z -C /opt -x -f /opt/archive
+    elif file --mime-type /opt/archive | grep "${MIME_TYPE_TAR_XZ}"; then
+        sudo tar -v -J -C /opt -x -f /opt/archive
+    elif file --mime-type /opt/archive | grep "${MIME_TYPE_TAR_BZ2}"; then
+        sudo tar -v -j -C /opt -x -f /opt/archive
+    elif file --mime-type /opt/archive | grep "${MIME_TYPE_ZIP}"; then
+        sudo 7z x -tzip -o/opt /opt/archive
     else
         echo "${FUNCNAME}() warning: unknown archive type" | \
         systemd-cat -p warning -t $0
         echo "Unknown archive type"
     fi
 
-    sudo rm -f /opt/$(basename "${1}")
+    sudo rm -f /opt/archive
 }
 
 function install_from_archives()
