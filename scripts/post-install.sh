@@ -123,8 +123,6 @@ PS2_BIOS_REMOTE="http://www.emu-land.net/consoles/ps2/bios?act=getfile&id=5017"
 BRUTAL_DOOM_REMOTE=\
 "https://www.moddb.com/downloads/mirror/95667/123/cf2617048e3641a1d9ee675fd134b7f5"
 
-HAVEN_AND_HEARTH_REMOTE=""
-
 YOUTUBE_DL_PATH=/usr/local/bin/youtube-dl
 YOUTUBE_DL_REMOTE="https://yt-dl.org/downloads/latest/youtube-dl"
 
@@ -1139,31 +1137,36 @@ function device_setup()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Device setup"
 
-    read -p "Choose preferred device: 1) dell-g3; 2) ryzen-7-desktop; any other option would skip this step >"
-    case $REPLY in
-    1)
-        git_repo_clone "${LUXDESK_CONFIGS_DELL_G3_REPO_URI}"
-        pushd "${PERSONAL_SRC_DIR}/bmigunov/luxdesk-configs-dell-g3"
-        cp -rbv sparse/home/user/. ~ | systemd-cat -p info -t $0
-        sudo cp -rbv sparse/etc/. /etc | systemd-cat -p info -t $0
-        cp -rnv post-install/* $(dirname "$0")'/..'
-        popd
-        ;;
-    2)
-        git_repo_clone "${LUXDESK_CONFIGS_RYZEN7_DESKTOP_REPO_URI}"
-        pushd "$PERSONAL_SRC_DIR/bmigunov/luxdesk-configs-ryzen7-desktop"
-        cp -rbv sparse/home/user/. ~ | systemd-cat -p info -t $0
-        sudo cp -rbv sparse/etc/. /etc | systemd-cat -p info -t $0
-        cp -rnv post-install/* $(dirname "$0")'/..'
-        popd
-        ;;
-    *)
-        echo "Presumably wrong option"
-        echo "device_setup() warning: presumably wrong option" | \
-        systemd-cat -p warning -t $0
-        return
-        ;;
-    esac
+    while [ true ]; do
+        read -p "Choose preferred device: 1) dell-g3; 2) ryzen-7-desktop; any other option would skip this step >"
+        case $REPLY in
+        1)
+            git_repo_clone "${LUXDESK_CONFIGS_DELL_G3_REPO_URI}"
+            cp -rbv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/sparse/home/user/. ~ | \
+            systemd-cat -p info -t $0
+            sudo cp -rbv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/sparse/etc/. /etc | \
+            systemd-cat -p info -t $0
+            cp -rnv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/post-install/* \
+                    $(dirname "$0")'/..'
+            break
+            ;;
+        2)
+            git_repo_clone "${LUXDESK_CONFIGS_RYZEN7_DESKTOP_REPO_URI}"
+            cp -rbv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/home/user/. ~ | \
+            systemd-cat -p info -t $0
+            sudo cp -rbv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/etc/. /etc | \
+            systemd-cat -p info -t $0
+            cp -rnv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/post-install/* \
+                    $(dirname "$0")'/..'
+            break
+            ;;
+        *)
+            echo "Presumably wrong option"
+            echo "${FUNCNAME}() warning: presumably wrong option" | \
+            systemd-cat -p warning -t $0
+            ;;
+        esac
+    done
 
     deb_packages_install device
 
@@ -1275,19 +1278,22 @@ systemd_setup
 
 mime_types_setup
 
-read -p "Would you like to reboot your system? [y/n]: "
-REPLY=${REPLY:-n}
-case $REPLY in
-[Yy] )
-    echo "Rebooting..."
-    systemctl reboot
-    ;;
-[Nn] )
-    echo "It is recommended to reboot your system"
-    exit 0
-    ;;
-* )
-    ;;
-esac
+while [ true ]; do
+    read -p "Would you like to reboot your system? [y/n]: "
+    case $REPLY in
+    [Yy] )
+        echo "Trying to reboot system..."
+        systemctl reboot
+        break
+        ;;
+    [Nn] )
+        echo "It is recommended to reboot your system after post-install script execution"
+        exit 0
+        ;;
+    * )
+        echo "Wrong answer"
+        ;;
+    esac
+done
 
 exit 0
