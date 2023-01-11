@@ -1112,17 +1112,15 @@ function nerd_fonts_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Installing fonts..."
 
-    for ARCHIVE_INDEX in "${#NERD_FONT_ARCHIVES[@]}"; do
-        sudo mkdir -p -v \
-        "${TRUETYPE_FONTS_DIR_PATH}"/"${NERD_FONT_DIRNAMES[${ARCHIVE_INDEX}]}"
+    for (( I=0; I<${#NERD_FONT_ARCHIVES[@]}; I++ )); do
+        sudo mkdir -p -v "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAMES[${I}]}"
 
-        sudo wget -q -P                                                        \
-        "${TRUETYPE_FONTS_DIR_PATH}"/"${NERD_FONT_DIRNAMES[${ARCHIVE_INDEX}]}" \
-        ${NERD_FONTS_REMOTE}${NERD_FONT_ARCHIVES[${ARCHIVE_INDEX}]}
+        sudo wget -q -P "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAMES[${I}]}" \
+                        "${NERD_FONTS_REMOTE}${NERD_FONT_ARCHIVES[${I}]}"
 
-        sudo 7z x -tzip -o"${TRUETYPE_FONTS_DIR_PATH}"/"${NERD_FONT_DIRNAMES[${ARCHIVE_INDEX}]}" \
-        "${NERD_FONT_ARCHIVES[${ARCHIVE_INDEX}]}" && sudo rm                                     \
-        "${TRUETYPE_FONTS_DIR_PATH}"/"${NERD_FONT_DIRNAMES[${ARCHIVE_INDEX}]}"/"${NERD_FONT_ARCHIVES[${ARCHIVE_INDEX}]}"
+        sudo 7z x -tzip -o"${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAMES[${I}]}"                        \
+                  "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAMES[${i}]}/${NERD_FONT_ARCHIVES[${I}]}" && \
+        sudo rm -f "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAMES[${I}]}/${NERD_FONT_ARCHIVES[${I}]}"
     done
 
     fc-cache -fv
