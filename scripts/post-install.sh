@@ -402,8 +402,8 @@ function apt_repos_add()
     echo "Adding apt repos from given list..."
 
     while read -r; do
-        echo "Adding repository signing key..."
-        sudo add-apt-repository -y "${REPLY}"
+        echo "Adding repository..."
+        echo "${REPLY}" | sudo tee -a /etc/apt/sources.list.d/post-install.list
     done <"${APT_REPOS_LIST_PATH}"
 }
 
@@ -960,8 +960,8 @@ function luxdesk_configs_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Installing LuxDesk configs..."
 
-    cp -rbv "$PERSONAL_SRC_DIR"/bmigunov/luxdesk-configs/sparse/home/user/. ~ | systemd-cat -p info -t $0
-    sudo cp -rbv "$PERSONAL_SRC_DIR"/bmigunov/luxdesk-configs/sparse/root/. /root | systemd-cat -p info -t $0
+    cp -rv "$PERSONAL_SRC_DIR"/bmigunov/luxdesk-configs/sparse/home/user/. ~ | systemd-cat -p info -t $0
+    sudo cp -rv "$PERSONAL_SRC_DIR"/bmigunov/luxdesk-configs/sparse/root/. /root | systemd-cat -p info -t $0
 
     mutt_accounts_obtain
 }
@@ -1025,10 +1025,10 @@ function vim_plugins_install()
        "${VIM_PLUGIN_DIR}"
 
     git_repo_clone "${VIM_DRACULA_REPO_URI}"
-    cp -r "${PERSONAL_SRC_DIR}/dracula/vim/after" "${VIM_DIR}"
-    cp -r "${PERSONAL_SRC_DIR}/dracula/vim/autoload/"* "${VIM_AUTOLOAD_DIR}"
-    cp -r "${PERSONAL_SRC_DIR}/dracula/vim/colors/"* "${VIM_COLORS_DIR}"
-    cp -r "${PERSONAL_SRC_DIR}/dracula/vim/doc/"* "${VIM_DOC_DIR}"
+    cp -rv "${PERSONAL_SRC_DIR}/dracula/vim/after" "${VIM_DIR}"
+    cp -rv "${PERSONAL_SRC_DIR}/dracula/vim/autoload/"* "${VIM_AUTOLOAD_DIR}"
+    cp -rv "${PERSONAL_SRC_DIR}/dracula/vim/colors/"* "${VIM_COLORS_DIR}"
+    cp -rv "${PERSONAL_SRC_DIR}/dracula/vim/doc/"* "${VIM_DOC_DIR}"
 }
 
 function bash_histfile_setup()
@@ -1142,9 +1142,9 @@ function device_setup()
         case $REPLY in
         1)
             git_repo_clone "${LUXDESK_CONFIGS_DELL_G3_REPO_URI}"
-            cp -rbv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/sparse/home/user/. ~ | \
+            cp -rv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/sparse/home/user/. ~ | \
             systemd-cat -p info -t $0
-            sudo cp -rbv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/sparse/etc/. /etc | \
+            sudo cp -rv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/sparse/etc/. /etc | \
             systemd-cat -p info -t $0
             cp -rnv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/post-install/* \
                     $(dirname "$0")'/..'
@@ -1152,9 +1152,9 @@ function device_setup()
             ;;
         2)
             git_repo_clone "${LUXDESK_CONFIGS_RYZEN7_DESKTOP_REPO_URI}"
-            cp -rbv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/home/user/. ~ | \
+            cp -rv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/home/user/. ~ | \
             systemd-cat -p info -t $0
-            sudo cp -rbv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/etc/. /etc | \
+            sudo cp -rv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/etc/. /etc | \
             systemd-cat -p info -t $0
             cp -rnv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/post-install/* \
                     $(dirname "$0")'/..'
