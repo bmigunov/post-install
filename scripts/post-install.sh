@@ -933,6 +933,7 @@ function openvpn3_install()
 
     sudo groupadd -r openvpn
     sudo useradd -r -s /sbin/nologin -g openvpn openvpn
+    sudo chown -R openvpn:openvpn /var/lib/openvpn3
     systemctl reload dbus
     popd
 }
