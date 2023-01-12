@@ -330,7 +330,7 @@ function prerequisites_install()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
-    packages_list_install_loop $(dirname "$0")"/../data/apt/deb/perequisites.list"
+    packages_list_install_loop $(dirname "$0")"/../data/apt/deb/prerequisites.list"
 }
 
 function home_directories_create()
