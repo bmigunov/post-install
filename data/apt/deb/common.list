@@ -134,6 +134,15 @@ libconfig9
 libindicator7
 libappindicator1
 libgtk2.0-0:i386
+libegl1:amd64
+libc6:amd64
+libc6:i386
+libgbm1:amd64
+libgbm1:i386
+libgl1:amd64
+libgl1:i386
+libgl1-mesa-dri:amd64
+libgl1-mesa-dri:i386
 libegl1:i386
 libglu1-mesa:i386
 libegl-mesa0:i386
