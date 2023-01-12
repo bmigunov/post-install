@@ -15,3 +15,4 @@ https://git.kernel.org/pub/scm/network/ofono/ofono.git
 https://git.linaro.org/landing-teams/working/qualcomm/qdl.git
 git@github.com:magicmonty/bash-git-prompt.git
 git@github.com:bmigunov/luxdesk-configs
+git@github.com:OpenVPN/openvpn3-linux.git

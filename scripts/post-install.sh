@@ -920,6 +920,23 @@ function i3blocks_contrib_install()
     popd
 }
 
+function openvpn3_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+    echo "Building & installing openvpn3"
+
+    pushd "${PERSONAL_SRC_DIR}/OpenVPN/openvpn3-linux"
+    ./bootstrap.sh
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+    make
+    sudo make install
+
+    sudo groupadd -r openvpn
+    sudo useradd -r -s /sbin/nologin -g openvpn openvpn
+    systemctl reload dbus
+    popd
+}
+
 function build_and_install_from_sources()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
@@ -935,6 +952,7 @@ function build_and_install_from_sources()
     i3blocks_contrib_install
     i3lock_color_install
     xkblayout_state_install
+    openvpn3_install
 }
 
 function mutt_accounts_obtain()
