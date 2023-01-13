@@ -931,6 +931,7 @@ function openvpn3_install()
     ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
     make
     sudo make install
+    make clean
 
     sudo groupadd -r openvpn
     sudo useradd -r -s /sbin/nologin -g openvpn openvpn
