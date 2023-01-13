@@ -1138,7 +1138,7 @@ function nerd_fonts_install()
                         "${NERD_FONTS_REMOTE}${NERD_FONT_ARCHIVES[${I}]}"
 
         sudo 7z x -tzip -o"${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAMES[${I}]}"                        \
-                  "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAMES[${i}]}/${NERD_FONT_ARCHIVES[${I}]}" && \
+                  "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAMES[${I}]}/${NERD_FONT_ARCHIVES[${I}]}" && \
         sudo rm -f "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAMES[${I}]}/${NERD_FONT_ARCHIVES[${I}]}"
     done
 
