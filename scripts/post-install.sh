@@ -70,6 +70,7 @@ PERSONAL_VAR_DIR="${WORKSPACE_DIR}"/personal/var
 PERSONAL_BACKUP_DIR="${PERSONAL_VAR_DIR}"/backup
 PERSONAL_IMAGES_DIR="${PERSONAL_VAR_DIR}"/images
 PERSONAL_LOG_DIR="${PERSONAL_VAR_DIR}"/log
+JOB_WORKSPACE_DIR="${WORKSPACE_DIR}"/job
 NES_GAMES_DIR="${GAMES_DIR}"/NES
 SEGA_GAMES_DIR="${GAMES_DIR}"/SEGA
 SNES_GAMES_DIR="${GAMES_DIR}"/SNES
@@ -354,7 +355,7 @@ function home_directories_create()
                 "${SNES_GAMES_DIR}" "${N64_GAMES_DIR}" "${PS_GAMES_DIR}"       \
                 "${PS2_GAMES_DIR}" "${ZXS_GAMES_DIR}" "${DOS_GAMES_DIR}"       \
                 "${PS_BIOS_IMAGES_DIR}" "${PS2_BIOS_IMAGES_DIR}"               \
-                "${BLADERF_X40_IMAGES_DIR}"
+                "${BLADERF_X40_IMAGES_DIR}" "${JOB_WORKSPACE_DIR}"
 }
 
 function rutracker_hosts_add()
