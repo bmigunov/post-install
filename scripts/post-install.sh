@@ -888,6 +888,7 @@ function srsran_install()
     sudo make install
     sudo srsran_install_configs.sh user
     make clean
+    rm -rf build
     popd
     popd
 }
