@@ -1142,7 +1142,7 @@ function device_setup()
     echo "Device setup"
 
     while [ true ]; do
-        read -p "Choose preferred device: 1) dell-g3; 2) ryzen-7-desktop; any other option would skip this step >"
+        read -p "Choose preferred device: 1) dell-g3; 2) ryzen-7-desktop; n) skip this step >"
         case $REPLY in
         1)
             git_repo_clone "${LUXDESK_CONFIGS_DELL_G3_REPO_URI}"
@@ -1164,6 +1164,11 @@ function device_setup()
                     $(dirname "$0")'/..'
             break
             ;;
+        n)
+            echo "Skip device setup"
+            echo "${FUNCNAME}() skipping this step..." | \
+            systemd-cat -p debug -t $0
+            return
         *)
             echo "Presumably wrong option"
             echo "${FUNCNAME}() warning: presumably wrong option" | \
