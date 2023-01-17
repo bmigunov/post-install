@@ -124,6 +124,9 @@ PS2_BIOS_REMOTE="http://www.emu-land.net/consoles/ps2/bios?act=getfile&id=5017"
 YOUTUBE_DL_PATH=/usr/local/bin/youtube-dl
 YOUTUBE_DL_REMOTE="https://yt-dl.org/downloads/latest/youtube-dl"
 
+RETROSHARE_APPIMAGE_PATH=/usr/local/bin/retroshare
+RETROSHARE_APPIMAGE_REMOTE="https://download.opensuse.org/repositories/network:/retroshare/AppImage/retroshare-gui-0.6.6-latest-x86_64.AppImage"
+
 YATE_SVN_REPO="http://voip.null.ro/svn/yate/trunk"
 YATEBTS_SVN_REPO="http://voip.null.ro/svn/yatebts/trunk"
 
@@ -689,6 +692,15 @@ function youtube_dl_install()
     sudo chmod 0755 "${YOUTUBE_DL_PATH}"
 }
 
+function retroshare_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    sudo wget -q -O "${RETROSHARE_APPIMAGE_PATH}" \
+                    "${RETROSHARE_APPIMAGE_REMOTE}"
+    sudo chmod 0755 "${RETROSHARE_APPIMAGE_PATH}"
+}
+
 function ssh_keys_store()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
@@ -1252,6 +1264,8 @@ snap_packages_install
 install_from_archives
 
 youtube_dl_install
+
+retroshare_install
 
 if [ -n "${GITHUB_KEY_RW_TOKEN}" ]; then
     ssh-keygen -q -f ~/.ssh/id_rsa -N ${SSH_KEY_PASS}
