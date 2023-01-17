@@ -121,9 +121,6 @@ BLADERF_X40_FPGA_BITSTREAM_0_11_1_PATH=\
 PS_BIOS_REMOTE="http://www.emu-land.net/consoles/psx/bios?act=getfile&id=4986"
 PS2_BIOS_REMOTE="http://www.emu-land.net/consoles/ps2/bios?act=getfile&id=5017"
 
-BRUTAL_DOOM_REMOTE=\
-"https://www.moddb.com/downloads/mirror/95667/123/cf2617048e3641a1d9ee675fd134b7f5"
-
 YOUTUBE_DL_PATH=/usr/local/bin/youtube-dl
 YOUTUBE_DL_REMOTE="https://yt-dl.org/downloads/latest/youtube-dl"
 
@@ -1120,14 +1117,6 @@ function playstation_bios_download()
     wget -q -O "${PS2_BIOS_IMAGES_DIR}/ps2_bios.7z" "${PS2_BIOS_REMOTE}"
 }
 
-function brutal_doom_download()
-{
-    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-    echo "Downloading Brutal Doom mod..."
-
-    wget -q -O "${GAMES_DIR}/brutal_doom.rar" "${BRUTAL_DOOM_REMOTE}"
-}
-
 function nerd_fonts_install()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
@@ -1280,7 +1269,6 @@ bladerf_x40_images_download
 
 if [ $NO_GAMES = 0 ]; then
     playstation_bios_download
-    brutal_doom_download
 fi
 
 nerd_fonts_install
