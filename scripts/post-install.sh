@@ -336,6 +336,10 @@ function home_directories_create()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Creating home directories..."
 
+    if [ -d /mnt/workspace ]; then
+        ln -s /mnt/workspace "${WORKSPACE_DIR}"
+    fi
+
     mkdir -p -v "${AUDIO_DIR}" "${BOOKS_DIR}" "${DOCUMENTS_DIR}"               \
                 "${DOWNLOADS_DIR}" "${GAMES_DIR}" "${PICTURES_DIR}"            \
                 "${TORRENTS_DIR}" "${VIDEO_DIR}" "${WORKSPACE_DIR}"            \
