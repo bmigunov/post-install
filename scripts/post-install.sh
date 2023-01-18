@@ -1175,6 +1175,7 @@ function device_setup()
             echo "${FUNCNAME}() skipping this step..." | \
             systemd-cat -p debug -t $0
             return
+            ;;
         *)
             echo "Presumably wrong option"
             echo "${FUNCNAME}() warning: presumably wrong option" | \
