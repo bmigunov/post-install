@@ -337,6 +337,7 @@ function home_directories_create()
     echo "Creating home directories..."
 
     if [ -d /mnt/workspace ]; then
+        sudo chown -R ${USER}:${USER} /mnt/workspace
         ln -s /mnt/workspace "${WORKSPACE_DIR}"
     fi
 
