@@ -6,7 +6,7 @@ suckless-tools
 rofi
 arandr
 feh
-compton
+picom
 conky
 rxvt-unicode
 sublime-text
