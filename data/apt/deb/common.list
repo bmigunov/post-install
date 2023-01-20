@@ -22,6 +22,7 @@ pulseaudio
 pamix
 gpm
 cups
+u-boot-tools
 flashrom
 wodim
 dvd+rw-tools
