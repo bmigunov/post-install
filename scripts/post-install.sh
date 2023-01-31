@@ -960,6 +960,7 @@ function ghidra_build_and_install()
     source ~/.bashrc
     sdk install gradle 7.6
     source ~/.bashrc
+    rm ~/.zshrc
 
     sudo update-alternatives --set java \
                              /usr/lib/jvm/temurin-17-jdk-amd64/bin/java
