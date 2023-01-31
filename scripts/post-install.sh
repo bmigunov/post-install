@@ -972,6 +972,15 @@ function ghidra_build_and_install()
     popd
 }
 
+function dracula_gimp_theme_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    mkdir -p ~/.config/GIMP/2.10/themes
+    ln -s "${PERSONAL_SRC_DIR}/dracula/gimp/Dracula" \
+          ~/.config/GIMP/2.10/themes/Dracula
+}
+
 function build_and_install_from_sources()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
@@ -991,6 +1000,7 @@ function build_and_install_from_sources()
         i3_gaps_install
         i3lock_color_install
         ghidra_build_and_install
+        dracula_gimp_theme_install
     fi
 }
 
