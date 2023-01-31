@@ -82,6 +82,9 @@ DOS_GAMES_DIR="${GAMES_DIR}"/DOS
 PS_BIOS_IMAGES_DIR="${PERSONAL_IMAGES_DIR}"/PS/BIOS
 PS2_BIOS_IMAGES_DIR="${PERSONAL_IMAGES_DIR}"/PS2/BIOS
 BLADERF_X40_IMAGES_DIR="${PERSONAL_IMAGES_DIR}"/bladerf/x40
+OBSIDIAN_DIR="${WORKSPACE_DIR}"/personal/obsidian
+GHIDRA_DIR="${WORKSPACE_DIR}"/personal/ghidra
+ANDROID_STUDIO_DIR="${WORKSPACE_DIR}"/Android
 
 POST_INSTALL_BACKUP_DIR="${PERSONAL_BACKUP_DIR}"/post-install
 
@@ -358,7 +361,8 @@ function home_directories_create()
                 "${SNES_GAMES_DIR}" "${N64_GAMES_DIR}" "${PS_GAMES_DIR}"       \
                 "${PS2_GAMES_DIR}" "${ZXS_GAMES_DIR}" "${DOS_GAMES_DIR}"       \
                 "${PS_BIOS_IMAGES_DIR}" "${PS2_BIOS_IMAGES_DIR}"               \
-                "${BLADERF_X40_IMAGES_DIR}" "${JOB_WORKSPACE_DIR}"
+                "${BLADERF_X40_IMAGES_DIR}" "${JOB_WORKSPACE_DIR}"             \
+                "${OBSIDIAN_DIR}" "${GHIDRA_DIR}" "${ANDROID_STUDIO_DIR}"
 }
 
 function rutracker_hosts_add()
