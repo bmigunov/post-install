@@ -52,7 +52,6 @@ bison
 perl
 python3
 erlang
-gradle
 php
 libxml2-utils
 policykit-1
@@ -158,6 +157,7 @@ python3-docutils
 python3-systemd
 python3-dbus
 python3-jinja2
+temurin-17-jdk
 make
 cmake
 automake

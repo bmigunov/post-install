@@ -98,7 +98,8 @@ REPO_COMPONENTS_WILDCARD="/^deb http.*main$\|^deb-src http.*main$/ s/$/ \
 contrib non-free/"
 
 declare -a ARCHIVE_KEYRING_REMOTES=("https://geti2p.net/_static/i2p-archive-keyring.gpg" \
-                                    "https://cli.github.com/packages/githubcli-archive-keyring.gpg")
+                                    "https://cli.github.com/packages/githubcli-archive-keyring.gpg" \
+                                    "https://packages.adoptium.net/artifactory/api/gpg/key/public")
 ARCHIVE_KEYRINGS_DIR=/usr/share/keyrings
 I2P_ARCHIVE_KEYRING_KEY_FINGERPRINT=\
 "7840 E761 0F28 B904 7535  49D7 67EC E560 5BCF 1346"
@@ -444,6 +445,9 @@ function apt_setup()
         sudo wget -q --no-check-certificate -P "${ARCHIVE_KEYRINGS_DIR}" \
                   "${ARCHIVE_KEYRING_REMOTE}"
     done
+
+    sudo mv "${ARCHIVE_KEYRINGS_DIR}"/public \
+            "${ARCHIVE_KEYRINGS_DIR}"/adoptium.asc
 
     sudo chmod go+r "${ARCHIVE_KEYRINGS_DIR}/githubcli-archive-keyring.gpg"
 
@@ -943,6 +947,26 @@ function openvpn3_install()
     popd
 }
 
+function ghidra_build_and_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+    echo "Building & installing ghidra"
+
+    curl -s "https://get.sdkman.io" | bash
+    source ~/.bashrc
+    sdk install gradle 7.6
+    source ~/.bashrc
+
+    sudo update-alternatives --set java \
+                             /usr/lib/jvm/temurin-17-jdk-amd64/bin/java
+
+    pushd "${PERSONAL_SRC_DIR}/NationalSecurityAgency/ghidra"
+    gradle -I gradle/support/fetchDependencies.gradle init
+    gradle buildGhidra
+    sudo 7z x -tzip -o/opt build/dist/ghidra_*.zip
+    popd
+}
+
 function build_and_install_from_sources()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
@@ -953,12 +977,16 @@ function build_and_install_from_sources()
     srsran_install
     translate_shell_install
     qdl_install
-    i3_gaps_install
     i3blocks_install
     i3blocks_contrib_install
-    i3lock_color_install
     xkblayout_state_install
     openvpn3_install
+
+    if [ ${NO_GUI} = 0 ]; then
+        i3_gaps_install
+        i3lock_color_install
+        ghidra_build_and_install
+    fi
 }
 
 function mutt_accounts_obtain()
