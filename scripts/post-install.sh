@@ -981,6 +981,17 @@ function dracula_gimp_theme_install()
           ~/.config/GIMP/2.10/themes/Dracula
 }
 
+function dracula_mc_theme_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    mkdir -p ~/.local/share/mc/skins
+    ln -s "${PERSONAL_SRC_DIR}/dracula/midnight-commander/skins/dracula.ini" \
+          ~/.local/share/mc/skins/dracula.ini
+    ln -s "${PERSONAL_SRC_DIR}/dracula/midnight-commander/skins/dracula256.ini" \
+          ~/.local/share/mc/skins/dracula256.ini
+}
+
 function build_and_install_from_sources()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
