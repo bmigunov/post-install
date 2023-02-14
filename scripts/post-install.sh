@@ -1001,6 +1001,15 @@ function dracula_mutt_theme_install()
           ~/.mutt/dracula.muttrc
 }
 
+function qspectrumanalyzer_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    pushd "${PERSONAL_SRC_DIR}/xmikos/qspectrumanalyzer"
+    pip3 install --user qspectrumanalyzer
+    popd
+}
+
 function build_and_install_from_sources()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
@@ -1021,6 +1030,7 @@ function build_and_install_from_sources()
         i3lock_color_install
         ghidra_build_and_install
         dracula_gimp_theme_install
+        qspectrumanalyzer_install
     fi
 }
 

@@ -15,6 +15,8 @@ modemmanager
 network-manager
 usb-modeswitch
 usb-modeswitch-data
+soapysdr-module-bladerf
+soapysdr-tools
 bluetooth
 libasound2
 alsa-utils
@@ -133,6 +135,7 @@ libsctp-dev
 libconfig9
 libindicator7
 libappindicator1
+libsoapysdr0.8
 libgtk2.0-0:i386
 libegl1:amd64
 libc6:amd64
@@ -157,6 +160,11 @@ python3-docutils
 python3-systemd
 python3-dbus
 python3-jinja2
+python3-pyqt5
+python3-numpy
+python3-scipy
+python3-soapysdr
+python3-pip
 temurin-17-jdk
 make
 cmake
@@ -220,3 +228,4 @@ ncmpcpp
 screen
 flatpak
 snapd
+libsoapysdr-doc
