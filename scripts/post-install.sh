@@ -98,7 +98,7 @@ APT_KEYS_LIST_PATH=$(dirname "$0")"/../data/apt/keys.list"
 APT_REPOS_LIST_PATH=$(dirname "$0")'/../data/apt/repos.list'
 
 REPO_COMPONENTS_WILDCARD="/^deb http.*main$\|^deb-src http.*main$/ s/$/ \
-contrib non-free/"
+contrib non-free non-free-firmware/"
 
 declare -a ARCHIVE_KEYRING_REMOTES=("https://geti2p.net/_static/i2p-archive-keyring.gpg" \
                                     "https://cli.github.com/packages/githubcli-archive-keyring.gpg" \
