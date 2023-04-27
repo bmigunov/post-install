@@ -128,6 +128,9 @@ PS2_BIOS_REMOTE="http://www.emu-land.net/consoles/ps2/bios?act=getfile&id=5017"
 YOUTUBE_DL_PATH=/usr/local/bin/youtube-dl
 YOUTUBE_DL_REMOTE="https://yt-dl.org/downloads/latest/youtube-dl"
 
+YT_DLP_PATH=/usr/local/bin/yt-dlp
+YT_DLP_REMOTE="https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp"
+
 YATE_SVN_REPO="http://voip.null.ro/svn/yate/trunk"
 YATEBTS_SVN_REPO="http://voip.null.ro/svn/yatebts/trunk"
 
@@ -700,6 +703,14 @@ function youtube_dl_install()
 
     sudo wget -q -O "${YOUTUBE_DL_PATH}" "${YOUTUBE_DL_REMOTE}"
     sudo chmod 0755 "${YOUTUBE_DL_PATH}"
+}
+
+function yt_dlp_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    sudo wget -q -O "${YT_DLP_PATH}" "${YT_DLP_REMOTE}"
+    sudo chmod 0755 "${YT_DLP_PATH}"
 }
 
 function ssh_keys_store()
@@ -1331,6 +1342,7 @@ snap_packages_install
 install_from_archives
 
 youtube_dl_install
+yt_dlp_install
 
 if [ -n "${GITHUB_KEY_RW_TOKEN}" ]; then
     ssh-keygen -q -f ~/.ssh/id_rsa -N ${SSH_KEY_PASS}
