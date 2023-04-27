@@ -48,6 +48,8 @@ neofetch
 geoclue-2.0
 binutils
 gcc
+binutils-arm-linux-gnueabi
+gcc-arm-linux-gnueabi
 g++
 flex
 bison
@@ -102,6 +104,7 @@ libjsoncpp-dev
 liblz4-dev
 libtinyxml2-dev
 libsystemd-dev
+libcap-dev
 uuid-dev
 libgconf-2-4
 libusb-1.0-0
