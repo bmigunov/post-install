@@ -131,9 +131,6 @@ YOUTUBE_DL_REMOTE="https://yt-dl.org/downloads/latest/youtube-dl"
 YT_DLP_PATH=/usr/local/bin/yt-dlp
 YT_DLP_REMOTE="https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp"
 
-YATE_SVN_REPO="http://voip.null.ro/svn/yate/trunk"
-YATEBTS_SVN_REPO="http://voip.null.ro/svn/yatebts/trunk"
-
 TRUETYPE_FONTS_DIR_PATH=/usr/share/fonts/truetype
 
 declare -a NERD_FONT_ARCHIVES=("3270.zip" "AnonymousPro.zip" "Hack.zip" \
@@ -962,6 +959,32 @@ function openvpn3_install()
     popd
 }
 
+function yate_build_and_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    echo "Building & installing yate..."
+    pushd "${PERSONAL_SRC_DIR}"/yate/yate
+    ./autogen.sh
+    ./configure
+    make
+    sudo make install-noapi
+    make clean
+    popd
+
+    echo "Building & installing yateBTS..."
+    pushd "${PERSONAL_SRC_DIR}"/yate/yatebts
+    ./autogen.sh
+    ./configure
+    make
+    sudo make install
+    make clean
+    popd
+
+    sudo addgroup yate
+    sudo usermod -a -G yate "$USER"
+}
+
 function ghidra_build_and_install()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
@@ -1035,6 +1058,7 @@ function build_and_install_from_sources()
     i3blocks_contrib_install
     xkblayout_state_install
     openvpn3_install
+    yate_build_and_install
 
     if [ ${NO_GUI} = 0 ]; then
         i3_gaps_install
@@ -1068,38 +1092,6 @@ function luxdesk_configs_install()
     sudo cp -rv "$PERSONAL_SRC_DIR"/bmigunov/luxdesk-configs/sparse/root/. /root | systemd-cat -p info -t $0
 
     mutt_accounts_obtain
-}
-
-function yate_build_and_install()
-{
-    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-
-    mkdir -p -v "${PERSONAL_SRC_DIR}"/yate
-    pushd "${PERSONAL_SRC_DIR}"/yate
-    svn checkout "${YATE_SVN_REPO}" yate
-    svn checkout "${YATEBTS_SVN_REPO}" yatebts
-
-    echo "Building & installing yate..."
-    pushd yate
-    ./autogen.sh
-    ./configure
-    make
-    sudo make install-noapi
-    make clean
-    popd
-
-    echo "Building & installing yateBTS..."
-    pushd yatebts
-    ./autogen.sh
-    ./configure
-    make
-    sudo make install
-    make clean
-    popd
-    popd
-
-    sudo addgroup yate
-    sudo usermod -a -G yate "$USER"
 }
 
 function vim_plugins_install()
@@ -1356,8 +1348,6 @@ if [ -n "${GITHUB_KEY_RW_TOKEN}" ]; then
 
     vim_plugins_install
 fi
-
-yate_build_and_install
 
 bash_histfile_setup
 mpd_setup
