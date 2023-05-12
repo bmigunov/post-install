@@ -964,7 +964,7 @@ function yate_build_and_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
     echo "Building & installing yate..."
-    pushd "${PERSONAL_SRC_DIR}"/yate/yate
+    pushd "${PERSONAL_SRC_DIR}"/bmigunov/yate
     ./autogen.sh
     ./configure
     make
@@ -973,7 +973,7 @@ function yate_build_and_install()
     popd
 
     echo "Building & installing yateBTS..."
-    pushd "${PERSONAL_SRC_DIR}"/yate/yatebts
+    pushd "${PERSONAL_SRC_DIR}"/bmigunov/yatebts
     ./autogen.sh
     ./configure
     make
