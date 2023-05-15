@@ -54,6 +54,7 @@ g++
 flex
 bison
 perl
+jq
 python3
 erlang
 php
