@@ -7,7 +7,7 @@ rofi
 arandr
 feh
 picom
-conky
+conky-all
 rxvt-unicode
 sublime-text
 wxhexeditor
@@ -21,10 +21,13 @@ wine
 wireshark
 gnuradio
 scrot
-sxiv
+nsxiv
 gimp
 inkscape
 darktable
+freecad
+kicad
+pcb-rnd
 okular
 okular-extra-backends
 fbreader
@@ -46,3 +49,7 @@ thunderbird
 remmina
 libreoffice
 krusader
+gqrx-sdr
+python3-pyqt5
+python3-pyqtgraph
+electrum
