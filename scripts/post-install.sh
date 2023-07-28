@@ -39,52 +39,69 @@ $LONGOPT_SSH_KEY_PASS: New SSH key passphrase (empty by default).\n\t\
 $LONGOPT_MUTT_ACCOUNTS_REMOTE: Link to the mutt 'accounts.gpg' file to download\
 \n"
 
-AUDIO_DIR=~/Audio
-BOOKS_DIR=~/Books
-DOCUMENTS_DIR=~/Documents
-DOWNLOADS_DIR=~/Downloads
-GAMES_DIR=~/Games
-PICTURES_DIR=~/Pictures
-TORRENTS_DIR=~/Torrents
-VIDEO_DIR=~/Video
-WORKSPACE_DIR=~/workspace
-MUSIC_DIR="${AUDIO_DIR}"/Music
-JOB_DOCUMENTS_DIR="${DOCUMENTS_DIR}"/job
-PERSONAL_DOCUMENTS_DIR="${DOCUMENTS_DIR}"/personal
-TELEGRAM_DOWNLOADS_DIR="${DOWNLOADS_DIR}"/Telegram
-TORRENT_DOWNLOADS_DIR="${DOWNLOADS_DIR}"/Torrent
-ARTWORK_DIR="${PICTURES_DIR}"/Artwork
-ICONS_DIR="${PICTURES_DIR}"/Icons
-GIF_DIR="${PICTURES_DIR}"/gif
-PHOTO_DIR="${PICTURES_DIR}"/Photo
-SAVED_PICTURES_DIR="${PICTURES_DIR}"/Saved
-SCREENSHOTS_DIR="${PICTURES_DIR}"/Screenshots
-WALLPAPERS_DIR="${PICTURES_DIR}"/Wallpapers
-FINISHED_TORRENTS_DIR="${TORRENTS_DIR}"/finished
-PERSONAL_VIDEO_DIR="${VIDEO_DIR}"/personal
-SAVED_VIDEO_DIR="${VIDEO_DIR}"/saved
-MOVIES_DIR="${VIDEO_DIR}"/Movies
-SERIES_DIR="${VIDEO_DIR}"/Series
-PERSONAL_SRC_DIR="${WORKSPACE_DIR}"/personal/src
-PERSONAL_VAR_DIR="${WORKSPACE_DIR}"/personal/var
-PERSONAL_BACKUP_DIR="${PERSONAL_VAR_DIR}"/backup
-PERSONAL_IMAGES_DIR="${PERSONAL_VAR_DIR}"/images
-PERSONAL_LOG_DIR="${PERSONAL_VAR_DIR}"/log
-JOB_WORKSPACE_DIR="${WORKSPACE_DIR}"/job
-NES_GAMES_DIR="${GAMES_DIR}"/NES
-SEGA_GAMES_DIR="${GAMES_DIR}"/SEGA
-SNES_GAMES_DIR="${GAMES_DIR}"/SNES
-N64_GAMES_DIR="${GAMES_DIR}"/N64
-PS_GAMES_DIR="${GAMES_DIR}"/PS
-PS2_GAMES_DIR="${GAMES_DIR}"/PS2
-ZXS_GAMES_DIR="${GAMES_DIR}"/ZXS
-DOS_GAMES_DIR="${GAMES_DIR}"/DOS
-PS_BIOS_IMAGES_DIR="${PERSONAL_IMAGES_DIR}"/PS/BIOS
-PS2_BIOS_IMAGES_DIR="${PERSONAL_IMAGES_DIR}"/PS2/BIOS
-BLADERF_X40_IMAGES_DIR="${PERSONAL_IMAGES_DIR}"/bladerf/x40
-OBSIDIAN_DIR="${WORKSPACE_DIR}"/personal/obsidian
-GHIDRA_DIR="${WORKSPACE_DIR}"/personal/ghidra
-ANDROID_STUDIO_DIR="${WORKSPACE_DIR}"/Android
+if [ ! ${XDG_STATE_HOME} ]; then
+    XDG_STATE_HOME="${HOME}/.local/state"
+fi
+
+if [ ! ${XDG_DATA_HOME} ]; then
+    XDG_DATA_HOME="${HOME}/.local/share"
+fi
+
+if [ ! ${XDG_CACHE_HOME} ]; then
+    XDG_CACHE_HOME="${HOME}/.cache"
+fi
+
+if [ ! ${XDG_CONFIG_HOME} ]; then
+    XDG_CONFIG_HOME="${HOME}/.config"
+fi
+
+AUDIO_DIR="~/Audio"
+BOOKS_DIR="~/Books"
+DOCUMENTS_DIR="~/Documents"
+DOWNLOADS_DIR="~/Downloads"
+GAMES_DIR="~/Games"
+PICTURES_DIR="~/Pictures"
+TORRENTS_DIR="~/Torrents"
+VIDEO_DIR="~/Video"
+WORKSPACE_DIR="~/workspace"
+MUSIC_DIR="${AUDIO_DIR}/Music"
+JOB_DOCUMENTS_DIR="${DOCUMENTS_DIR}/job"
+PERSONAL_DOCUMENTS_DIR="${DOCUMENTS_DIR}/personal"
+TELEGRAM_DOWNLOADS_DIR="${DOWNLOADS_DIR}/Telegram"
+TORRENT_DOWNLOADS_DIR="${DOWNLOADS_DIR}/Torrent"
+ARTWORK_DIR="${PICTURES_DIR}/Artwork"
+ICONS_DIR="${PICTURES_DIR}/Icons"
+GIF_DIR="${PICTURES_DIR}/gif"
+PHOTO_DIR="${PICTURES_DIR}/Photo"
+SAVED_PICTURES_DIR="${PICTURES_DIR}/Saved"
+SCREENSHOTS_DIR="${PICTURES_DIR}/Screenshots"
+WALLPAPERS_DIR="${PICTURES_DIR}/Wallpapers"
+FINISHED_TORRENTS_DIR="${TORRENTS_DIR}/finished"
+PERSONAL_VIDEO_DIR="${VIDEO_DIR}/personal"
+SAVED_VIDEO_DIR="${VIDEO_DIR}/saved"
+MOVIES_DIR="${VIDEO_DIR}/Movies"
+SERIES_DIR="${VIDEO_DIR}/Series"
+PERSONAL_SRC_DIR="${WORKSPACE_DIR}/personal/src"
+PERSONAL_VAR_DIR="${WORKSPACE_DIR}/personal/var"
+PERSONAL_BACKUP_DIR="${PERSONAL_VAR_DIR}/backup"
+PERSONAL_IMAGES_DIR="${PERSONAL_VAR_DIR}/images"
+PERSONAL_LOG_DIR="${PERSONAL_VAR_DIR}/log"
+JOB_WORKSPACE_DIR="${WORKSPACE_DIR}/job"
+NES_GAMES_DIR="${GAMES_DIR}/NES"
+SEGA_GAMES_DIR="${GAMES_DIR}/SEGA"
+SNES_GAMES_DIR="${GAMES_DIR}/SNES"
+N64_GAMES_DIR="${GAMES_DIR}/N64"
+PS_GAMES_DIR="${GAMES_DIR}/PS"
+PS2_GAMES_DIR="${GAMES_DIR}/PS2"
+ZXS_GAMES_DIR="${GAMES_DIR}/ZXS"
+DOS_GAMES_DIR="${GAMES_DIR}/DOS"
+PS_BIOS_IMAGES_DIR="${PERSONAL_IMAGES_DIR}/PS/BIOS"
+PS2_BIOS_IMAGES_DIR="${PERSONAL_IMAGES_DIR}/PS2/BIOS"
+BLADERF_X40_IMAGES_DIR="${PERSONAL_IMAGES_DIR}/bladerf/x40"
+OBSIDIAN_DIR="${WORKSPACE_DIR}/personal/obsidian"
+GHIDRA_DIR="${WORKSPACE_DIR}/personal/ghidra"
+ANDROID_STUDIO_DIR="${WORKSPACE_DIR}/Android"
+LESSHST_DIR="${XDG_STATE_HOME}/less"
 
 POST_INSTALL_BACKUP_DIR="${PERSONAL_BACKUP_DIR}"/post-install
 
@@ -102,7 +119,8 @@ contrib non-free non-free-firmware/"
 
 declare -a ARCHIVE_KEYRING_REMOTES=("https://geti2p.net/_static/i2p-archive-keyring.gpg" \
                                     "https://cli.github.com/packages/githubcli-archive-keyring.gpg" \
-                                    "https://packages.adoptium.net/artifactory/api/gpg/key/public")
+                                    "https://packages.adoptium.net/artifactory/api/gpg/key/public" \
+                                    "https://packages.element.io/debian/element-io-archive-keyring.gpg")
 ARCHIVE_KEYRINGS_DIR=/usr/share/keyrings
 I2P_ARCHIVE_KEYRING_KEY_FINGERPRINT=\
 "7840 E761 0F28 B904 7535  49D7 67EC E560 5BCF 1346"
@@ -143,25 +161,27 @@ NERD_FONTS_REMOTE=\
 "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/"
 
 I3_BLOCKS_BLOCKLETS_DIR="/usr/share/i3blocks"
-declare -a I3BLOCK_BLOCKLETS=("backlight/backlight" "bandwidth3/bandwidth3" \
-                              "battery2/battery2" "cpu_usage/cpu_usage"     \
-                              "disk-io/disk-io" "disk/disk" "docker/docker" \
-                              "gpu-load/gpu-load" "iface/iface"             \
-                              "memory/memory" "miccontrol/miccontrol"       \
-                              "monitor_manager/monitor_manager"             \
-                              "rofi-wttr/rofi-wttr" "taskw/taskw"           \
-                              "temperature/temperature"                     \
-                              "volume-pulseaudio/volume-pulseaudio"         \
-                              "wlan-dbm/wlan-dbm")
+declare -a I3BLOCK_BLOCKLETS=("backlight/backlight" "bandwidth3/bandwidth3"    \
+                              "battery2/battery2" "cpu_usage/cpu_usage"        \
+                              "disk-io/disk-io" "disk/disk" "docker/docker"    \
+                              "gpu-load/gpu-load" "iface/iface"                \
+                              "memory/memory" "miccontrol/miccontrol"          \
+                              "monitor_manager/monitor_manager"                \
+                              "rofi-wttr/rofi-wttr" "taskw/taskw"              \
+                              "temperature/temperature"                        \
+                              "volume-pulseaudio/volume-pulseaudio"            \
+                              "wlan-dbm/wlan-dbm" "keyindicator/keyindicator")
 
 REMOTE_DEB_TMPDIR=/tmp/remote_deb
 
-VIM_DIR=~/.vim
-VIM_BUNDLE_DIR="${VIM_DIR}"/bundle
-VIM_PLUGIN_DIR="${VIM_DIR}"/plugin
-VIM_COLORS_DIR="${VIM_DIR}"/colors
-VIM_DOC_DIR="${VIM_DIR}"/doc
-VIM_AUTOLOAD_DIR="${VIM_DIR}"/autoload
+
+VIM_DIR="${XDG_CONFIG_HOME}/vim"
+VIM_BUNDLE_DIR="${VIM_DIR}/bundle"
+VIM_PLUGIN_DIR="${VIM_DIR}/plugin"
+VIM_COLORS_DIR="${VIM_DIR}/colors"
+VIM_DOC_DIR="${VIM_DIR}/doc"
+VIM_AUTOLOAD_DIR="${VIM_DIR}/autoload"
+VIM_STATE_DIR="${XDG_STATE_HOME}/vim"
 
 YCM_REPO_URI="git@github.com:ycm-core/YouCompleteMe.git"
 VIM_PATHOGEN_REPO_URI="git@github.com:tpope/vim-pathogen.git"
@@ -362,7 +382,8 @@ function home_directories_create()
                 "${PS2_GAMES_DIR}" "${ZXS_GAMES_DIR}" "${DOS_GAMES_DIR}"       \
                 "${PS_BIOS_IMAGES_DIR}" "${PS2_BIOS_IMAGES_DIR}"               \
                 "${BLADERF_X40_IMAGES_DIR}" "${JOB_WORKSPACE_DIR}"             \
-                "${OBSIDIAN_DIR}" "${GHIDRA_DIR}" "${ANDROID_STUDIO_DIR}"
+                "${OBSIDIAN_DIR}" "${GHIDRA_DIR}" "${ANDROID_STUDIO_DIR}"      \
+                "${LESSHST_DIR}" "${VIM_STATE_DIR}"
 }
 
 function rutracker_hosts_add()
@@ -436,8 +457,8 @@ function apt_setup()
     echo "Appending sources.list with 'contrib' & 'non-free' repo components..." | \
     systemd-cat -p debug -t $0
     echo "Appending sources.list with 'contrib' & 'non-free' repo components..."
-    mkdir -p -v "${POST_INSTALL_BACKUP_DIR}"/etc/apt
-    cp /etc/apt/sources.list "${POST_INSTALL_BACKUP_DIR}"/etc/apt
+    mkdir -p -v "${POST_INSTALL_BACKUP_DIR}/etc/apt"
+    cp /etc/apt/sources.list "${POST_INSTALL_BACKUP_DIR}/etc/apt"
     sudo sed -i "${REPO_COMPONENTS_WILDCARD}" /etc/apt/sources.list
 
     echo "Adding i386 dpkg arch..."
@@ -900,7 +921,7 @@ function srsran_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Building & installing srsRAN..."
 
-    pushd "$PERSONAL_SRC_DIR"/srsran/srsRAN
+    pushd "$PERSONAL_SRC_DIR"/srsran/srsRAN_4G
     rm -rf build
     mkdir -p -v build && pushd build
     cmake ..
@@ -932,9 +953,6 @@ function i3blocks_contrib_install()
 
     git checkout bmigunov-github/mpd
     sudo cp mpd/scripts/* "${I3_BLOCKS_BLOCKLETS_DIR}"
-
-    git checkout bmigunov-github/weather-util
-    sudo cp weather-util/weather-util "${I3_BLOCKS_BLOCKLETS_DIR}"
 
     git checkout master
     popd
@@ -1030,9 +1048,54 @@ function dracula_mutt_theme_install()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
-    mkdir -p ~/.mutt
+    mkdir -p ~/.config/mutt
     ln -s "${PERSONAL_SRC_DIR}/dracula/mutt/dracula.muttrc" \
-          ~/.mutt/dracula.muttrc
+          ~/.config/mutt/dracula.muttrc
+}
+
+function python_metar_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    pushd "${PERSONAL_SRC_DIR}/python-metar/python-metar"
+    sudo python setup.py install
+    popd
+}
+
+function simplesoapy_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    pushd "${PERSONAL_SRC_DIR}/xmikos/simplesoapy"
+    sudo python setup.py install
+    popd
+}
+
+function simplespectral_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    pushd "${PERSONAL_SRC_DIR}/xmikos/simplespectral"
+    sudo python setup.py install
+    popd
+}
+
+function soapy_power_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    pushd "${PERSONAL_SRC_DIR}/xmikos/soapy_power"
+    sudo python setup.py install
+    popd
+}
+
+function qt_py_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    pushd "${PERSONAL_SRC_DIR}/mottosso/Qt.py"
+    sudo python setup.py install
+    popd
 }
 
 function qspectrumanalyzer_install()
@@ -1040,7 +1103,7 @@ function qspectrumanalyzer_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
     pushd "${PERSONAL_SRC_DIR}/xmikos/qspectrumanalyzer"
-    pip3 install --user qspectrumanalyzer
+    sudo python setup.py install
     popd
 }
 
@@ -1059,12 +1122,17 @@ function build_and_install_from_sources()
     xkblayout_state_install
     openvpn3_install
     yate_build_and_install
+    python_metar_install
+    simplesoapy_install
+    simplespectral_install
+    soapy_power_install
 
     if [ ${NO_GUI} = 0 ]; then
         i3_gaps_install
         i3lock_color_install
         ghidra_build_and_install
         dracula_gimp_theme_install
+        qt_py_install
         qspectrumanalyzer_install
     fi
 }
@@ -1073,10 +1141,10 @@ function mutt_accounts_obtain()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
-    mkdir -p -v ~/.mutt
+    mkdir -p -v ~/.config/mutt
 
     if [ ${MUTT_ACCOUNTS_GPG_REMOTE} ]; then
-        wget -q -O ~/.mutt/accounts.gpg "${MUTT_ACCOUNTS_GPG_REMOTE}"
+        wget -q -O ~/.config/mutt/accounts.gpg "${MUTT_ACCOUNTS_GPG_REMOTE}"
     else
         echo "${FUNCNAME}() issue: accounts.gpg link is not provided" | \
         systemd-cat -p warning -t $0
@@ -1132,11 +1200,7 @@ function bash_histfile_setup()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Setting up bash history file..."
 
-    if [ ${XDG_DATA_HOME} ]; then
-        BASH_HISTFILE_DIR="${XDG_DATA_HOME}/bash"
-    else
-        BASH_HISTFILE_DIR="${HOME}/.local/share/bash"
-    fi
+    BASH_HISTFILE_DIR="${XDG_DATA_HOME}/bash"
 
     mkdir -p -v "${BASH_HISTFILE_DIR}"
     if [ -e ~/.bash_history ]; then
@@ -1151,22 +1215,22 @@ function bash_histfile_setup()
 
 function mpd_setup()
 {
-    if [ ${XDG_CACHE_DIR} ]; then
-        MPD_CACHE_DIR="${XDG_CACHE_HOME}/mpd"
-    else
-        MPD_CACHE_DIR="${HOME}/.cache/mpd"
-    fi
+    MPD_CACHE_DIR="${XDG_CACHE_HOME}/mpd"
+    MPD_STATE_DIR="${XDG_STATE_HOME}/mpd"
 
     MPD_PLAYLIST_DIRECTORY="${MPD_CACHE_DIR}/playlists"
 
     MPD_DB_FILE_PATH="${MPD_CACHE_DIR}/tag_cache"
     MPD_LOG_FILE_PATH="${MPD_CACHE_DIR}/mpd.log"
-    MPD_STATE_FILE_PATH="${MPD_CACHE_DIR}/state"
+    MPD_STATE_FILE_PATH="${MPD_STATE_DIR}/state"
     MPD_STICKER_FILE_PATH="${MPD_CACHE_DIR}/sticker.sql"
 
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Creating mpd files & directories..."
 
+
+    mkdir -p "${MPD_STATE_DIR}"
+    mkdir -p "${MPD_CACHE_DIR}"
     mkdir -p -v "$MPD_PLAYLIST_DIRECTORY"
 
     touch "$MPD_DB_FILE_PATH"
@@ -1278,8 +1342,8 @@ function root_setup()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
-    sudo ln -s ~/.vim /root/.vim
-    sudo ln -s ~/.vimrc /root/.vimrc
+    sudo ln -s ~/.config/vim /root/.vim
+    sudo ln -s ~/.config/vim/vimrc /root/.vimrc
     sudo ln -s ~/.config/dircolors /root/.config/dircolors
 }
 
@@ -1303,8 +1367,7 @@ function mime_types_setup()
 
     xdg-mime default okularApplication_chm.desktop application/vnd.ms-htmlhelp
     xdg-mime default okularApplication_pdf.desktop application/pdf
-    xdg-mime default sxiv.desktop {"image/png","image/jpeg","image/tiff"}
-    xdg-mime default sxiv_gif.desktop image/gif
+    xdg-mime default nsxiv.desktop {"image/png","image/jpeg","image/tiff","image/gif"}
     xdg-mime defaul FBReader.desktop application/x-fictionbook+xml
     xdg-mime default darktable.desktop image/x-sony-arw
 }
@@ -1349,6 +1412,8 @@ if [ -n "${GITHUB_KEY_RW_TOKEN}" ]; then
     vim_plugins_install
 fi
 
+pipx install frogmouth
+
 bash_histfile_setup
 mpd_setup
 
@@ -1367,6 +1432,8 @@ root_setup
 systemd_setup
 
 mime_types_setup
+
+sudo sensors-detect
 
 while [ true ]; do
     read -p "Would you like to reboot your system? [y/n]: "
