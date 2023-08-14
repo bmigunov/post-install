@@ -54,6 +54,7 @@ gcc
 binutils-arm-linux-gnueabi
 gcc-arm-linux-gnueabi
 g++
+rust-all
 flex
 bison
 perl
@@ -217,6 +218,7 @@ docker-ce
 docker-ce-cli
 pv
 ssh
+gnome-keyring
 gnupg-agent
 mc
 rar
