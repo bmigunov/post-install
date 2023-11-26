@@ -175,18 +175,7 @@ declare -a I3BLOCK_BLOCKLETS=("backlight/backlight" "bandwidth3/bandwidth3"    \
 REMOTE_DEB_TMPDIR=/tmp/remote_deb
 
 
-VIM_DIR="${XDG_CONFIG_HOME}/vim"
-VIM_BUNDLE_DIR="${VIM_DIR}/bundle"
-VIM_PLUGIN_DIR="${VIM_DIR}/plugin"
-VIM_COLORS_DIR="${VIM_DIR}/colors"
-VIM_DOC_DIR="${VIM_DIR}/doc"
-VIM_AUTOLOAD_DIR="${VIM_DIR}/autoload"
-VIM_STATE_DIR="${XDG_STATE_HOME}/vim"
-
 YCM_REPO_URI="git@github.com:ycm-core/YouCompleteMe.git"
-VIM_PATHOGEN_REPO_URI="git@github.com:tpope/vim-pathogen.git"
-VIM_TAGLIST_REPO_URI="git@github.com:vim-scripts/taglist.vim.git"
-VIM_DRACULA_REPO_URI="git@github.com:dracula/vim.git"
 
 LUXDESK_CONFIGS_DELL_G3_REPO_URI=\
 "git@github.com:bmigunov/luxdesk-configs-dell-g3"
@@ -383,7 +372,7 @@ function home_directories_create()
                 "${PS_BIOS_IMAGES_DIR}" "${PS2_BIOS_IMAGES_DIR}"               \
                 "${BLADERF_X40_IMAGES_DIR}" "${JOB_WORKSPACE_DIR}"             \
                 "${OBSIDIAN_DIR}" "${GHIDRA_DIR}" "${ANDROID_STUDIO_DIR}"      \
-                "${LESSHST_DIR}" "${VIM_STATE_DIR}"
+                "${LESSHST_DIR}"
 }
 
 function rutracker_hosts_add()
@@ -1162,39 +1151,6 @@ function luxdesk_configs_install()
     mutt_accounts_obtain
 }
 
-function vim_plugins_install()
-{
-    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-    echo "Installing vim plugins..."
-
-    mkdir -p -v "${VIM_DIR}"/{bundle,plugin,colors,doc,autoload}
-
-    VIM_PLUGINS_REPOS_LIST=$(dirname "$0")"/../data/git/vim.list"
-
-    for REPO in $(cat ${VIM_PLUGINS_REPOS_LIST}); do
-        git_repo_clone "${REPO}" "${VIM_BUNDLE_DIR}"
-    done
-
-    git_repo_clone ${YCM_REPO_URI} "${VIM_BUNDLE_DIR}"
-    pushd "${VIM_BUNDLE_DIR}"/YouCompleteMe
-    python3 install.py
-    popd
-
-    git_repo_clone "${VIM_PATHOGEN_REPO_URI}"
-    cp "${PERSONAL_SRC_DIR}"/tpope/vim-pathogen/autoload/pathogen.vim \
-       "${VIM_AUTOLOAD_DIR}"
-
-    git_repo_clone "${VIM_TAGLIST_REPO_URI}"
-    cp "${PERSONAL_SRC_DIR}/vim-scripts/taglist.vim/plugin/taglist.vim" \
-       "${VIM_PLUGIN_DIR}"
-
-    git_repo_clone "${VIM_DRACULA_REPO_URI}"
-    cp -rv "${PERSONAL_SRC_DIR}/dracula/vim/after" "${VIM_DIR}"
-    cp -rv "${PERSONAL_SRC_DIR}/dracula/vim/autoload/"* "${VIM_AUTOLOAD_DIR}"
-    cp -rv "${PERSONAL_SRC_DIR}/dracula/vim/colors/"* "${VIM_COLORS_DIR}"
-    cp -rv "${PERSONAL_SRC_DIR}/dracula/vim/doc/"* "${VIM_DOC_DIR}"
-}
-
 function bash_histfile_setup()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
@@ -1342,8 +1298,6 @@ function root_setup()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
-    sudo ln -s ~/.config/vim /root/.vim
-    sudo ln -s ~/.config/vim/vimrc /root/.vimrc
     sudo ln -s ~/.config/dircolors /root/.config/dircolors
 }
 
@@ -1408,8 +1362,6 @@ if [ -n "${GITHUB_KEY_RW_TOKEN}" ]; then
 
     sources_get
     build_and_install_from_sources
-
-    vim_plugins_install
 fi
 
 pipx install frogmouth
