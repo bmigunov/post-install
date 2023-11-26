@@ -35,7 +35,7 @@ dosfstools
 ntfs-3g
 ifuse
 go-mtpfs
-photorec
+testdisk
 cifs-utils
 nfs-kernel-server
 nfs-common
