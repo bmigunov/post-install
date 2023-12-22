@@ -16,7 +16,6 @@ REQUIRED_DISTRO_NAME=Debian
 
 NO_GUI=0
 NO_GAMES=0
-KDE=0
 SSH_KEY_PASS=""
 GITHUB_KEY_RW_TOKEN=
 MUTT_ACCOUNTS_GPG_REMOTE=
@@ -25,7 +24,6 @@ LONGOPT_HELP="--help"
 SHORTOPT_HELP="-h"
 LONGOPT_NO_GAMES="--no_games"
 LONGOPT_NO_GUI="--no_gui"
-LONGOPT_KDE="--install_kde"
 LONGOPT_KEY_RW_TOKEN="--key_rw_token"
 LONGOPT_SSH_KEY_PASS="--ssh_key_pass"
 LONGOPT_MUTT_ACCOUNTS_REMOTE="--mutt_accounts_remote"
@@ -33,11 +31,10 @@ LONGOPT_MUTT_ACCOUNTS_REMOTE="--mutt_accounts_remote"
 USAGE="post-install.sh\nA script to set up a freshly installed system.\n\t\
 $LONGOPT_HELP, $SHORTOPT_HELP: Print help message.\n\t$LONGOPT_NO_GAMES: Do \
 not install games.\n\t$LONGOPT_NO_GUI: Do not install GUI applications and X \
-server.\n\t$LONGOPT_KDE: Install 'kde-standard'.\n\t$LONGOPT_KEY_RW_TOKEN: \
-GitHub personal access token to read and write public keys.\n\t\
-$LONGOPT_SSH_KEY_PASS: New SSH key passphrase (empty by default).\n\t\
-$LONGOPT_MUTT_ACCOUNTS_REMOTE: Link to the mutt 'accounts.gpg' file to download\
-\n"
+server.\n\t$LONGOPT_KEY_RW_TOKEN: GitHub personal access token to read and \
+write public keys.\n\t$LONGOPT_SSH_KEY_PASS: New SSH key passphrase (empty by \
+default).\n\t$LONGOPT_MUTT_ACCOUNTS_REMOTE: Link to the mutt 'accounts.gpg' \
+file to download\n"
 
 if [ ! ${XDG_STATE_HOME} ]; then
     XDG_STATE_HOME="${HOME}/.local/state"
@@ -191,9 +188,6 @@ function options_check()
             shift 1
         elif [ ${1} = ${LONGOPT_NO_GUI} ]; then
             NO_GUI=1
-            shift 1
-        elif [ ${1} = ${LONGOPT_KDE} ]; then
-            KDE=1
             shift 1
         elif [ ${1} = ${LONGOPT_KEY_RW_TOKEN} ]; then
             GITHUB_KEY_RW_TOKEN="${2}"
@@ -483,10 +477,6 @@ function deb_packages_install_from_lists()
 
     if [ ${NO_GAMES} = 0 ]; then
         packages_list_install_loop "${GAMES_LIST}"
-    fi
-
-    if [ ${KDE} = 1 ]; then
-        sudo apt-get -y install kde-standard
     fi
 }
 
