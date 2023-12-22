@@ -105,9 +105,6 @@ LESSHST_DIR="${XDG_STATE_HOME}/less"
 
 POST_INSTALL_BACKUP_DIR="${PERSONAL_BACKUP_DIR}"/post-install
 
-RUTRACKER_HOSTS="\n\n# RuTracker\n185.15.211.203 bt.t-ru.org\n185.15.211.203 \
-bt2.t-ru.org\n185.15.211.203 bt3.t-ru.org\n185.15.211.203 bt4.t-ru.org"
-
 EN_US_UTF8_LOCALE="en_US.UTF-8 UTF-8"
 SUPPORTED_LOCALES_PATH=/usr/share/i18n/SUPPORTED
 
@@ -373,16 +370,6 @@ function home_directories_create()
                 "${BLADERF_X40_IMAGES_DIR}" "${JOB_WORKSPACE_DIR}"             \
                 "${OBSIDIAN_DIR}" "${GHIDRA_DIR}" "${ANDROID_STUDIO_DIR}"      \
                 "${LESSHST_DIR}"
-}
-
-function rutracker_hosts_add()
-{
-    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-    echo "Adding RuTracker hosts..."
-
-    mkdir -p -v ${POST_INSTALL_BACKUP_DIR}/etc
-    cp /etc/hosts "${POST_INSTALL_BACKUP_DIR}"/etc
-    printf "${RUTRACKER_HOSTS}" | sudo tee -a /etc/hosts
 }
 
 function locale_add()
@@ -1336,7 +1323,6 @@ prerequisites_install
 
 home_directories_create
 
-rutracker_hosts_add
 locale_add "${EN_US_UTF8_LOCALE}"
 
 apt_setup
