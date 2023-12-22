@@ -61,7 +61,10 @@ perl
 jq
 python3
 erlang
+rebar3
 php
+phpunit
+php-ast
 libxml2-utils
 policykit-1
 libutf8proc-dev
@@ -111,6 +114,16 @@ libtinyxml2-dev
 libsystemd-dev
 libcap-dev
 uuid-dev
+libanyevent-perl
+libclass-refresh-perl
+libcompiler-lexer-perl
+libdata-dump-perl
+libio-aio-perl
+libjson-perl
+libmoose-perl
+libpadwalker-perl
+libscalar-list-utils-perl
+libcoro-perl
 libgconf-2-4
 libusb-1.0-0
 libncursesw5
@@ -159,7 +172,6 @@ libglu1-mesa:i386
 libegl-mesa0:i386
 libglfw3
 libmbedtls14
-pipx
 python3-minimal
 python3-dev
 python3-tk
@@ -194,6 +206,9 @@ cscope
 hexer
 neovim
 exuberant-ctags
+clangd
+quick-lint-js
+quick-lint-js-vim
 subversion
 git
 tig
@@ -238,4 +253,7 @@ ncmpcpp
 screen
 flatpak
 snapd
+pipx
+npm
+composer
 libsoapysdr-doc
