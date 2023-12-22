@@ -1385,6 +1385,14 @@ systemd_setup
 
 mime_types_setup
 
+sudo cpan Perl::LanguageServer
+
+composer update
+
+if [ ! -x /usr/local/bin/qmlls ]; then
+    sudo ln -s /usr/lib/qt6/bin/qmlls /usr/local/bin/qmlls
+fi
+
 sudo sensors-detect
 
 while [ true ]; do
