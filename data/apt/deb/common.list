@@ -109,11 +109,14 @@ libssl-dev
 libcap-ng-dev
 libglib2.0-dev
 libjsoncpp-dev
+libjson-c-dev
 liblz4-dev
 libtinyxml2-dev
 libsystemd-dev
 libcap-dev
 uuid-dev
+libwlroots-dev
+libpcre2-dev
 libanyevent-perl
 libclass-refresh-perl
 libcompiler-lexer-perl
@@ -124,6 +127,7 @@ libmoose-perl
 libpadwalker-perl
 libscalar-list-utils-perl
 libcoro-perl
+libjson-c5
 libgconf-2-4
 libusb-1.0-0
 libncursesw5
@@ -172,6 +176,7 @@ libglu1-mesa:i386
 libegl-mesa0:i386
 libglfw3
 libmbedtls14
+libwlroots11
 python3-minimal
 python3-dev
 python3-tk
@@ -201,6 +206,7 @@ aspell-ru
 aspell-en
 pandoc
 asciidoctor
+scdoc
 rlwrap
 cscope
 hexer
@@ -232,6 +238,7 @@ containerd.io
 docker-ce
 docker-ce-cli
 pv
+fish
 ssh
 gnome-keyring
 gnupg-agent
@@ -256,4 +263,5 @@ snapd
 pipx
 npm
 composer
+qemu-system-arm
 libsoapysdr-doc
