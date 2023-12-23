@@ -8,8 +8,6 @@ libcairo2
 libgdk-pixbuf2.0-bin
 im-config
 suckless-tools
-rofi
-feh
 conky-all
 kitty
 sublime-text
@@ -22,8 +20,8 @@ dosbox
 wine
 wireshark
 gnuradio
-scrot
-nsxiv
+grim
+imv
 gimp
 inkscape
 darktable
@@ -58,3 +56,4 @@ python3-pyqtgraph
 electrum
 kanshi
 wdisplays
+swaybg

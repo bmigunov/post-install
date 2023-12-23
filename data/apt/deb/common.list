@@ -65,6 +65,7 @@ rebar3
 php
 phpunit
 php-ast
+golang
 libxml2-utils
 policykit-1
 libutf8proc-dev
@@ -247,7 +248,6 @@ rar
 unrar
 p7zip-full
 mutt
-lynx
 rtorrent
 irssi
 profanity
