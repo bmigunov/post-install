@@ -22,8 +22,6 @@ function github_ssh_keys_store()
          -H "X-GitHub-Api-Version: 2022-11-28"             \
          https://api.github.com/user/keys                  \
          -d "{\"title\":\"${USER}@${HOSTNAME}\",\"key\":\"${SSH_ID_RSA_PUB}\"}"
-
-    export GIT_PREFER_SSH=1
 }
 
 function git_repo_clone()
