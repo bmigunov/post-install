@@ -1,28 +1,14 @@
-git@github.com:bmigunov/omp_interview-test_userspace.git
-git@github.com:bmigunov/omp_interview-test_kernel.git
-git@github.com:bolt1502/MOLY.LR9.W1444.MD.LWTG.MP.V88.git
-git@github.com:cia-foundation/TempleOS.git
-git@github.com:ARMmbed/mbedtls.git
-git@github.com:cuberite/polarssl.git
-git@github.com:MusicPlayerDaemon/libmpdclient.git
-git@github.com:MusicPlayerDaemon/MPD.git
-git@github.com:nonpop/xkblayout-state.git
-git@github.com:soimort/translate-shell.git
-git@github.com:Nuand/bladeRF.git
-git@github.com:srsran/srsRAN_4G.git
-git://git.code.sf.net/p/openlte/code
-https://git.kernel.org/pub/scm/network/ofono/ofono.git
-https://git.linaro.org/landing-teams/working/qualcomm/qdl.git
-git@github.com:magicmonty/bash-git-prompt.git
-git@github.com:bmigunov/luxdesk-configs
-git@github.com:OpenVPN/openvpn3-linux.git
-git@github.com:dracula/midnight-commander.git
-git@github.com:dracula/mutt.git
-git@github.com:dracula/tig.git
-git@github.com:bmigunov/yate.git
-git@github.com:bmigunov/yatebts.git
-git@github.com:b3nj5m1n/xdg-ninja.git
-git@github.com:python-metar/python-metar.git
-git@github.com:xmikos/simplesoapy.git
-git@github.com:xmikos/simplespectral.git
-git@github.com:xmikos/soapy_power.git
+git@github.com:ARMmbed/mbedtls.git https://github.com/ARMmbed/mbedtls.git
+git@github.com:nonpop/xkblayout-state.git https://github.com/nonpop/xkblayout-state.git
+git@github.com:soimort/translate-shell.git https://github.com/soimort/translate-shell.git
+git@github.com:Nuand/bladeRF.git https://github.com/Nuand/bladeRF.git
+git@github.com:srsran/srsRAN_4G.git https://github.com/srsran/srsRAN_4G.git
+- https://git.kernel.org/pub/scm/network/ofono/ofono.git
+- https://git.linaro.org/landing-teams/working/qualcomm/qdl.git
+git@github.com:magicmonty/bash-git-prompt.git https://github.com/magicmonty/bash-git-prompt.git
+git@github.com:bmigunov/luxdesk-configs https://github.com/bmigunov/luxdesk-configs
+git@github.com:OpenVPN/openvpn3-linux.git https://github.com/OpenVPN/openvpn3-linux.git
+git@github.com:bmigunov/yate.git https://github.com/bmigunov/yate.git
+git@github.com:bmigunov/yatebts.git https://github.com/bmigunov/yatebts.git
+git@github.com:b3nj5m1n/xdg-ninja.git https://github.com/b3nj5m1n/xdg-ninja.git
+git@github.com:fairyglade/ly.git https://github.com/fairyglade/ly.git

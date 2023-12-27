@@ -1,11 +1,5 @@
-git@github.com:Airblader/i3.git
-git@github.com:vivien/i3blocks.git
-git@github.com:vivien/i3blocks-contrib.git
-git@github.com:Raymo111/i3lock-color.git
-git@github.com:brndnmtthws/conky.git
-git@github.com:eworm-de/mpd-notification.git
-git@github.com:dracula/obsidian.git
-git@github.com:NationalSecurityAgency/ghidra.git
-git@github.com:dracula/gimp.git
-git@github.com:xmikos/qspectrumanalyzer.git
-git@github.com:mottosso/Qt.py.git
+git@github.com:vivien/i3blocks.git https://github.com/vivien/i3blocks.git
+git@github.com:vivien/i3blocks-contrib.git https://github.com/vivien/i3blocks-contrib.git
+git@github.com:NationalSecurityAgency/ghidra.git https://github.com/NationalSecurityAgency/ghidra.git
+git@github.com:crgimenes/neko.git https://github.com/crgimenes/neko.git
+git@github.com:WillPower3309/swayfx.git https://github.com/WillPower3309/swayfx.git

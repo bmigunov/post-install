@@ -244,10 +244,9 @@ ssh
 gnome-keyring
 gnupg-agent
 mc
-rar
-unrar
 p7zip-full
 mutt
+lynx
 rtorrent
 irssi
 profanity

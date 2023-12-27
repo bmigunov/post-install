@@ -6,6 +6,7 @@ libgdk-pixbuf2.0-dev
 libpango-1.0-0
 libcairo2
 libgdk-pixbuf2.0-bin
+xwayland
 im-config
 suckless-tools
 conky-all
