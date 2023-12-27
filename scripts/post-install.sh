@@ -27,6 +27,7 @@ LONGOPT_NO_GUI="--no_gui"
 LONGOPT_KEY_RW_TOKEN="--key_rw_token"
 LONGOPT_SSH_KEY_PASS="--ssh_key_pass"
 LONGOPT_MUTT_ACCOUNTS_REMOTE="--mutt_accounts_remote"
+LONGOPT_HELP="--help"
 
 USAGE="post-install.sh\nA script to set up a freshly installed system.\n\t\
 $LONGOPT_HELP, $SHORTOPT_HELP: Print help message.\n\t$LONGOPT_NO_GAMES: Do \
@@ -42,7 +43,7 @@ function options_check()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
     while [ true ]; do
-        if [ ${1} = ${LONGOPT_HELP} -o ${1} = ${SHORTOPT_HELP} ]; then
+        if [ ${1} = ${LONGOPT_HELP} ] || [ ${1} = ${SHORTOPT_HELP} ]; then
             printf "${USAGE}"
             exit 0
         elif [ ${1} = ${LONGOPT_NO_GAMES} ]; then
@@ -185,13 +186,14 @@ function init()
     tabs 4
     clear
 
-    options_check "$@"
     os_check
     privileges_check
 
     prerequisites_install
 }
 
+
+options_check "$@"
 
 init
 
