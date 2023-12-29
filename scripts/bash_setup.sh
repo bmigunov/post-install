@@ -17,8 +17,8 @@ function bash_setup()
     BASH_HISTFILE_DIR="${XDG_DATA_HOME}/bash"
 
     mkdir -p -v "${BASH_HISTFILE_DIR}"
-    if [ -e "${HOME}"/.bash_history ]; then
-        mv "${HOME}"/.bash_history "${BASH_HISTFILE_DIR}"
+    if [ -e "${HOME}/.bash_history" ]; then
+        mv "${HOME}/.bash_history" "${BASH_HISTFILE_DIR}/bash_history"
     else
         echo                                                                              \
         "${FUNCNAME}(): no .bash_history file in home directory; creating new empty file" \
