@@ -19,7 +19,7 @@ I2P_ARCHIVE_KEYRING_KEY_FINGERPRINT=\
 REPO_COMPONENTS_WILDCARD="/^deb http.*main$\|^deb-src http.*main$/ s/$/ \
 contrib non-free/"
 
-KEYRINGS_DIR=/usr/share/keyrings
+KEYRINGS_DIR="/usr/share/keyrings"
 
 
 function repo_components_add()
@@ -54,7 +54,7 @@ function apt_keyring_append()
 
     for KEYRING_REMOTE in $(cat "${APT_KEYRING_LIST_PATH}"); do
         echo "Fetching repository signing key..."
-        sudo wget -q --no-check-certificate --content-disposition -P \
+        sudo wget --no-check-certificate --content-disposition -P \
                   "${KEYRINGS_DIR}" "${KEYRING_REMOTE}"
     done
 
@@ -62,7 +62,7 @@ function apt_keyring_append()
 
     if ! gpg --keyid-format long --import --import-options show-only \
              --with-fingerprint                                      \
-             "${ARCHIVE_KEYRINGS_DIR}/i2p-archive-keyring.gpg" |     \
+             "${KEYRINGS_DIR}/i2p-archive-keyring.gpg" |     \
          grep "${I2P_ARCHIVE_KEYRING_KEY_FINGERPRINT}"; then
         echo "Warning! i2p keyring fingerprint mismatch. Removing keyring"
         echo "Warning! i2p keyring fingerprint mismatch. Removing keyring" | \
@@ -95,12 +95,25 @@ function system_update()
     fi
 }
 
+function repo_components_check()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+    echo "Checking 'sources.list'..."
+
+    if ! grep ' contrib ' /etc/apt/sources.list || ! grep ' non-free ' /etc/apt/sources.list; then
+        echo "Failure. 'contrib' or 'non-free' repo components are missing"
+        exit 1
+    else
+        echo "Ok. 'contrib' and 'non-free' repo components are present"
+    fi
+}
+
 function apt_setup()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Setting up apt packet manager..."
 
-    repo_components_add
+#     repo_components_add
 
     echo "Adding i386 dpkg arch..."
     sudo dpkg --add-architecture i386
