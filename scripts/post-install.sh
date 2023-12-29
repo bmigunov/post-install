@@ -171,7 +171,6 @@ function init()
     source $(dirname "$0")"/device.sh"
     source $(dirname "$0")"/directories.sh"
     source $(dirname "$0")"/emu-land.sh"
-    source $(dirname "$0")"/flatpak.sh"
     source $(dirname "$0")"/fonts.sh"
     source $(dirname "$0")"/git.sh"
     source $(dirname "$0")"/language_servers.sh"
@@ -193,6 +192,8 @@ function init()
     os_check
     privileges_check
 
+    repo_components_check
+
     prerequisites_install
 }
 
@@ -208,9 +209,6 @@ locales_setup
 apt_setup
 deb_packages_install
 deb_cleanup
-
-flatpak_repos_add
-flatpak_packages_install
 
 snap_packages_install
 
