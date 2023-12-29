@@ -9,7 +9,7 @@
 
 
 
-TRUETYPE_FONTS_DIR_PATH=/usr/share/fonts/truetype
+TRUETYPE_FONTS_DIR_PATH="/usr/share/fonts/truetype"
 
 NERD_FONTS_REMOTE=\
 "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/"
@@ -30,7 +30,7 @@ function nerd_fonts_install()
     for (( I=0; I<${#NERD_FONT_ARCHIVES[@]}; I++ )); do
         sudo mkdir -p -v "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAMES[${I}]}"
 
-        sudo wget -q -P "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAMES[${I}]}" \
+        sudo wget -P "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAMES[${I}]}" \
                         "${NERD_FONTS_REMOTE}${NERD_FONT_ARCHIVES[${I}]}"
 
         sudo 7z x -tzip -o"${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAMES[${I}]}"                        \
