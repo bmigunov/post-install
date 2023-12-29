@@ -9,7 +9,7 @@
 
 
 
-BLADERF_X40_IMAGES_DIR="${PERSONAL_IMAGES_DIR}/bladerf/x40"
+BLADERF_X40_IMAGES_DIR="${IMG_DIR}/bladerf/x40"
 
 BLADERF_FX3_IMAGE_LATEST_REMOTE=\
 "https://www.nuand.com/fx3/bladeRF_fw_latest.img"
@@ -25,10 +25,12 @@ function bladerf_x40_images_download()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Downloading bladeRF x40 images..."
 
-    wget -q -P "${BLADERF_X40_IMAGES_DIR}" "${BLADERF_FX3_IMAGE_LATEST_REMOTE}"
-    wget -q -P "${BLADERF_X40_IMAGES_DIR}" \
+    wget --content-disposition -P "${BLADERF_X40_IMAGES_DIR}" \
+         "${BLADERF_FX3_IMAGE_LATEST_REMOTE}"
+    wget --content-disposition -P "${BLADERF_X40_IMAGES_DIR}" \
          "${BLADERF_X40_FPGA_BITSTREAM_LATEST_REMOTE}"
-    wget -q -P "${BLADERF_X40_IMAGES_DIR}" "${BLADERF_FX3_2_3_2_IMAGE_REMOTE}"
-    wget -q -P "${BLADERF_X40_IMAGES_DIR}" \
+    wget --content-disposition -P "${BLADERF_X40_IMAGES_DIR}" \
+         "${BLADERF_FX3_2_3_2_IMAGE_REMOTE}"
+    wget --content-disposition -P "${BLADERF_X40_IMAGES_DIR}" \
          "${BLADERF_X40_FPGA_BITSTREAM_0_11_1_REMOTE}"
 }
