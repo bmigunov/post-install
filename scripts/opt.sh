@@ -20,7 +20,7 @@ function opt_fetch()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Fetching opt application..."
 
-    wget -q --content-disposition -P "${LOCAL_OPT_DIR}" "${1}"
+    wget --content-disposition -P "${LOCAL_OPT_DIR}" "${1}"
 }
 
 function opt_extract()
