@@ -31,8 +31,12 @@ function luxdesk_configs_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Installing LuxDesk configs..."
 
-    cp -rv "$PERSONAL_SRC_DIR"/bmigunov/luxdesk-configs/sparse/home/user/. ~ | systemd-cat -p info -t $0
-    sudo cp -rv "$PERSONAL_SRC_DIR"/bmigunov/luxdesk-configs/sparse/root/. /root | systemd-cat -p info -t $0
+    cp --backup=none -rv                                            \
+       "${SRC_DIR}"/bmigunov/luxdesk-configs/sparse/home/user/. ~ | \
+       systemd-cat -p info -t $0
+    sudo cp --backup=none -rv                                         \
+            "${SRC_DIR}"/bmigunov/luxdesk-configs/sparse/etc/. /etc | \
+            systemd-cat -p info -t $0
 
     mutt_accounts_obtain
 }
@@ -42,7 +46,7 @@ function mbedtls_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Building & installing mbedTLS..."
 
-    pushd "$PERSONAL_SRC_DIR"/ARMmbed/mbedtls
+    pushd "${SRC_DIR}/ARMmbed/mbedtls"
     git checkout master
     git fetch
     git pull
@@ -62,7 +66,7 @@ function bladerf_binaries_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Building & installing bladeRF binaries..."
 
-    pushd "$PERSONAL_SRC_DIR"/Nuand/bladeRF/host
+    pushd "${SRC_DIR}/Nuand/bladeRF/host"
     rm -rf build
     mkdir -p -v build && pushd build
     cmake ..
@@ -81,7 +85,7 @@ function srsran_4g_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Building & installing srsRAN..."
 
-    pushd "$PERSONAL_SRC_DIR"/srsran/srsRAN_4G
+    pushd "${SRC_DIR}/srsran/srsRAN_4G"
     rm -rf build
     mkdir -p -v build && pushd build
     cmake ..
@@ -100,7 +104,7 @@ function translate_shell_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Building & installing translate-shell..."
 
-    pushd "$PERSONAL_SRC_DIR"/soimort/translate-shell
+    pushd "${SRC_DIR}/soimort/translate-shell"
     make
     sudo make install
     make clean
@@ -112,7 +116,7 @@ function qdl_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Building & installing qdl..."
 
-    pushd "$PERSONAL_SRC_DIR"/qualcomm/qdl
+    pushd "${SRC_DIR}/qualcomm/qdl"
     make
     sudo make install
     make clean
@@ -124,7 +128,7 @@ function xkblayout_state_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Building & installing xkblayout-state..."
 
-    pushd "$PERSONAL_SRC_DIR"/nonpop/xkblayout-state
+    pushd "${SRC_DIR}/nonpop/xkblayout-state"
     make
     sudo make install
     make clean
@@ -136,7 +140,7 @@ function openvpn3_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Building & installing openvpn3"
 
-    pushd "${PERSONAL_SRC_DIR}/OpenVPN/openvpn3-linux"
+    pushd "${SRC_DIR}/OpenVPN/openvpn3-linux"
     ./bootstrap.sh
     ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
     make
@@ -155,7 +159,7 @@ function yate_build_and_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
     echo "Building & installing yate..."
-    pushd "${PERSONAL_SRC_DIR}"/bmigunov/yate
+    pushd "${SRC_DIR}/bmigunov/yate"
     ./autogen.sh
     ./configure
     make
@@ -164,7 +168,7 @@ function yate_build_and_install()
     popd
 
     echo "Building & installing yateBTS..."
-    pushd "${PERSONAL_SRC_DIR}"/bmigunov/yatebts
+    pushd "${SRC_DIR}/bmigunov/yatebts"
     ./autogen.sh
     ./configure
     make
@@ -181,11 +185,20 @@ function ly_build_and_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Building & installing ly..."
 
-    pushd "${PERSONAL_SRC_DIR}"/fairyglade/ly
+    pushd "${SRC_DIR}/fairyglade/ly"
     make
     sudo make install installsystemd
     make clean
     popd
+}
+
+function vim_plug_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+    echo "Installing vim-plug..."
+
+    cp --backup=none -v "${SRC_DIR}/junegunn/vim-plug/plug.vim" \
+       "${XDG_DATA_HOME}/nvim/site/autoload/plug.vim"
 }
 
 function swayfx_build_and_install()
@@ -193,7 +206,7 @@ function swayfx_build_and_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Building & installing swayfx..."
 
-    pushd "${PERSONAL_SRC_DIR}"/WillPower3309/swayfx
+    pushd "${SRC_DIR}/WillPower3309/swayfx"
     meson build
     ninja -C build
     sudo ninja -C build install
@@ -208,7 +221,7 @@ function i3blocks_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Building & installing i3blocks..."
 
-    pushd "$PERSONAL_SRC_DIR"/vivien/i3blocks
+    pushd "${SRC_DIR}/vivien/i3blocks"
     git remote add bmigunov-github git@github.com:bmigunov/i3blocks.git
     git fetch --all
     git checkout ticker-support
@@ -226,7 +239,7 @@ function i3blocks_contrib_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Installing i3blocks 'blocklets' from 'i3blocks-contrib' git repo"
 
-    pushd "$PERSONAL_SRC_DIR"/vivien/i3blocks-contrib
+    pushd "${SRC_DIR}/vivien/i3blocks-contrib"
     git remote add bmigunov-github git@github.com:bmigunov/i3blocks-contrib.git
     git fetch --all
     git pull
@@ -249,7 +262,6 @@ function ghidra_build_and_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Building & installing ghidra"
 
-    curl -s "https://get.sdkman.io" | bash
     source "${HOME}"/.bashrc
     sdk install gradle 7.6
     source "${HOME}"/.bashrc
@@ -258,10 +270,10 @@ function ghidra_build_and_install()
     sudo update-alternatives --set java \
                              /usr/lib/jvm/temurin-17-jdk-amd64/bin/java
 
-    pushd "${PERSONAL_SRC_DIR}/NationalSecurityAgency/ghidra"
+    pushd "${SRC_DIR}/NationalSecurityAgency/ghidra"
     gradle -I gradle/support/fetchDependencies.gradle init
     gradle buildGhidra
-    sudo 7z x -tzip -o"${HOME}"/.local/opt build/dist/ghidra_*.zip
+    7z x -tzip -o"${HOME}"/.local/opt build/dist/ghidra_*.zip
     popd
 }
 
@@ -328,18 +340,19 @@ function build_and_install_from_sources()
     luxdesk_configs_install
     mbedtls_install
     bladerf_binaries_install
-    srsran_4g_install
+#     srsran_4g_install
     translate_shell_install
     qdl_install
     xkblayout_state_install
     openvpn3_install
     yate_build_and_install
     ly_build_and_install
+    vim_plug_install
 
     if [ ${NO_GUI} = 0 ]; then
         swayfx_build_and_install
         i3blocks_install
-        i3blocks_contrib_install
-        ghidra_build_and_install
+#         i3blocks_contrib_install
+#         ghidra_build_and_install
     fi
 }
