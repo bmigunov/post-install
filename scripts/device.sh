@@ -10,7 +10,6 @@
 
 
 source $(dirname "${0}")"/deb.sh"
-source $(dirname "${0}")"/flatpak.sh"
 source $(dirname "${0}")"/snap.sh"
 source $(dirname "${0}")"/cargo.sh"
 source $(dirname "${0}")"/pipx.sh"
@@ -35,21 +34,21 @@ function device_setup()
         case $REPLY in
         1)
             git_repo_clone "${LUXDESK_CONFIGS_DELL_G3_REPO_URI}"
-            cp --backup=none -rv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/sparse/home/user/. ~ | \
+            cp --backup=none -rv "${SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/sparse/home/user/. ~ | \
             systemd-cat -p info -t $0
-            sudo cp --backup=none -rv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/sparse/etc/. /etc | \
+            sudo cp --backup=none -rv "${SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/sparse/etc/. /etc | \
             systemd-cat -p info -t $0
-            cp -rnv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/post-install/* \
+            cp -rnv "${SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/post-install/* \
                     $(dirname "$0")'/..'
             break
             ;;
         2)
             git_repo_clone "${LUXDESK_CONFIGS_RYZEN7_DESKTOP_REPO_URI}"
-            cp --backup=none -rv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/home/user/. ~ | \
+            cp --backup=none -rv "${SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/home/user/. ~ | \
             systemd-cat -p info -t $0
-            sudo cp --backup=none -rv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/etc/. /etc | \
+            sudo cp --backup=none -rv "${SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/etc/. /etc | \
             systemd-cat -p info -t $0
-            cp -rnv "${PERSONAL_SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/post-install/* \
+            cp -rnv "${SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/post-install/* \
                     $(dirname "$0")'/..'
             break
             ;;
@@ -68,9 +67,6 @@ function device_setup()
     done
 
     deb_packages_install device
-
-    flatpak_repos_add device
-    flatpak_packages_install device
 
     snap_packages_install device
 
