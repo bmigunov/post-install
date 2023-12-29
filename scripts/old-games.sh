@@ -15,10 +15,10 @@ function old_games_fetch()
     echo "Fetching from 'Old-games.ru'..."
 
     for URI in $(cat $(dirname "${0}")"/../data/old-games/dos.list"); do
-        wget -q --content-disposition -P "${DOS_GAMES_DIR}" "${URI}"
+        wget --content-disposition -P "${DOS_GAMES_DIR}" "${URI}"
     done
 
     for URI in $(cat $(dirname "${0}")"/../data/old-games/windows.list"); do
-        wget -q --content-disposition -P "${WINDOWS_GAMES_DIR}" "${URI}"
+        wget --content-disposition -P "${WINDOWS_GAMES_DIR}" "${URI}"
     done
 }
