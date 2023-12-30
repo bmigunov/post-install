@@ -197,6 +197,7 @@ function vim_plug_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Installing vim-plug..."
 
+    mkdir -p -v "${XDG_DATA_HOME}/nvim/site/autoload"
     cp --backup=none -v "${SRC_DIR}/junegunn/vim-plug/plug.vim" \
        "${XDG_DATA_HOME}/nvim/site/autoload/plug.vim"
 }
