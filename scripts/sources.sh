@@ -14,13 +14,11 @@ source $(dirname "${0}")"/mutt.sh"
 
 
 I3_BLOCKS_BLOCKLETS_DIR="/usr/share/i3blocks"
-declare -a I3BLOCK_BLOCKLETS=("backlight/backlight" "bandwidth3/bandwidth3"    \
-                              "battery2/battery2" "cpu_usage/cpu_usage"        \
-                              "disk-io/disk-io" "disk/disk" "docker/docker"    \
-                              "gpu-load/gpu-load" "iface/iface"                \
-                              "memory/memory" "miccontrol/miccontrol"          \
-                              "monitor_manager/monitor_manager"                \
-                              "rofi-wttr/rofi-wttr" "taskw/taskw"              \
+declare -a I3BLOCK_BLOCKLETS=("bandwidth3/bandwidth3" "battery2/battery2"      \
+                              "cpu_usage/cpu_usage" "disk-io/disk-io"          \
+                              "disk/disk" "docker/docker" "gpu-load/gpu-load"  \
+                              "iface/iface" "memory/memory"                    \
+                              "miccontrol/miccontrol" "taskw/taskw"            \
                               "temperature/temperature"                        \
                               "volume-pulseaudio/volume-pulseaudio"            \
                               "wlan-dbm/wlan-dbm" "keyindicator/keyindicator")
