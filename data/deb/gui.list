@@ -16,12 +16,11 @@ wxhexeditor
 qtcreator
 lazarus
 phantomjs
-fbzx
 dosbox
 wine
 wireshark
 gnuradio
-grim
+grimshot
 imv
 gimp
 inkscape
@@ -58,3 +57,6 @@ electrum
 kanshi
 wdisplays
 swaybg
+albert
+qt5ct
+swayidle
