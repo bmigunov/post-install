@@ -59,7 +59,7 @@ flex
 bison
 perl
 jq
-python3
+python3-full
 erlang
 rebar3
 php
@@ -195,6 +195,7 @@ python3-pyfftw
 temurin-17-jdk
 make
 cmake
+cmake-format
 automake
 autoconf
 autoconf-archive
