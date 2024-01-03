@@ -119,5 +119,5 @@ function directories_create()
                 "${SAVED_LOGS_DIR}" "${IMG_DIR}" "${BACKUP_DIR}"               \
                 "${NEOVIM_BACKUP_DIR}" "${POST_INSTALL_BACKUP_DIR}"            \
                 "${LESSHST_DIR}" "${XDG_CONFIG_HOME}" "${XDG_DATA_HOME}"       \
-                "${XDG_STATE_HOME}" "${XDG_CACHE_HOME}"
+                "${XDG_STATE_HOME}" "${XDG_CACHE_HOME}" "${SAVED_VIDEO_DIR}"
 }
