@@ -178,6 +178,7 @@ libegl-mesa0:i386
 libglfw3
 libmbedtls14
 libwlroots11
+libtcmalloc-minimal4
 python3-minimal
 python3-dev
 python3-tk
