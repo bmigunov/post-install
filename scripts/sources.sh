@@ -276,6 +276,19 @@ function ghidra_build_and_install()
     popd
 }
 
+function swaylock_effects_build_and_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+    echo "Building & installing swaylock-effects"
+
+    pushd "${SRC_DIR}/mortie/swaylock-effects"
+    meson build
+    ninja -C build
+    sudo ninja -C build install
+    ninja -C build clean
+    popd
+}
+
 function sources_get()
 {
     PREFIX=
@@ -353,5 +366,6 @@ function build_and_install_from_sources()
         i3blocks_install
 #         i3blocks_contrib_install
 #         ghidra_build_and_install
+        swaylock_effects_build_and_install
     fi
 }
