@@ -5,4 +5,3 @@ deb [arch=amd64,arm64] https://c.quick-lint-js.com/debian experimental main
 deb [signed-by=/usr/share/keyrings/i2p-archive-keyring.gpg] https://deb.i2p2.de/ bookworm main
 deb [arch=amd64 signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main
 deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main
-deb http://download.opensuse.org/repositories/home:/manuelschneid3r/Debian_Testing/ /
