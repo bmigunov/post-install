@@ -256,6 +256,8 @@ language_servers_setup
 
 sudo sensors-detect
 
+sudo wget -P /usr/share/nvim/runtime/spell "https://ftp.nluug.nl/vim/runtime/spell/ru.utf-8.spl"
+
 while [ true ]; do
     read -p "Would you like to reboot your system? [y/n]: "
     case $REPLY in
