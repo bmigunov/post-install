@@ -252,7 +252,7 @@ lynx
 rtorrent
 irssi
 profanity
-ncal
+calcurse
 taskwarrior
 weather-util
 mpd
@@ -266,3 +266,8 @@ npm
 composer
 qemu-system-arm
 libsoapysdr-doc
+aptitude
+pamixer
+rar
+unrar
+pipewire
