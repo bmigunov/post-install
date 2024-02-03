@@ -271,3 +271,5 @@ pamixer
 rar
 unrar
 pipewire
+i2c-tools
+ncdu
