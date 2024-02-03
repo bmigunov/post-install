@@ -12,6 +12,7 @@
 source $(dirname "${0}")"/mime.sh"
 
 
+USER_OPT_DIR=/opt/${USER}
 LOCAL_OPT_DIR="${HOME}/.local/opt"
 
 
@@ -80,7 +81,9 @@ function opt_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Installing opt apps from the archives..."
 
-    mkdir -p -v "${LOCAL_OPT_DIR}"
+    sudo mkdir -p -v ${USER_OPT_DIR}
+    sudo chown -r ${USER}:${USER} ${USER_OPT_DIR}
+    ln -s "${USER_OPT_DIR}" "${LOCAL_OPT_DIR}"
 
     if [ ${1} ]; then
         PREFIX="${1}-"
