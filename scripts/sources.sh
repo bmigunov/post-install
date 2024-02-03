@@ -14,15 +14,27 @@ source $(dirname "${0}")"/mutt.sh"
 
 
 I3_BLOCKS_BLOCKLETS_DIR="/usr/share/i3blocks"
-declare -a I3BLOCK_BLOCKLETS=("bandwidth3/bandwidth3" "battery2/battery2"      \
-                              "cpu_usage/cpu_usage" "disk-io/disk-io"          \
-                              "disk/disk" "docker/docker" "gpu-load/gpu-load"  \
-                              "iface/iface" "memory/memory"                    \
-                              "miccontrol/miccontrol" "taskw/taskw"            \
-                              "temperature/temperature"                        \
-                              "volume-pulseaudio/volume-pulseaudio"            \
-                              "wlan-dbm/wlan-dbm" "keyindicator/keyindicator")
+declare -a I3BLOCK_BLOCKLETS=("disk-io" "memory" "cpu_usage" "temperature" \
+                              "metars" "volume-pipewire")
 
+
+function make_build_install_clean()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    make
+    sudo make install
+    make clean
+}
+
+function ninja_build_install_clean()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    ninja -C build
+    sudo ninja -C build install
+    ninja -C build clean
+}
 
 function luxdesk_configs_install()
 {
@@ -34,6 +46,9 @@ function luxdesk_configs_install()
        systemd-cat -p info -t $0
     sudo cp --backup=none -rv                                         \
             "${SRC_DIR}"/bmigunov/luxdesk-configs/sparse/etc/. /etc | \
+            systemd-cat -p info -t $0
+    sudo cp --backup=none -rv                                         \
+            "${SRC_DIR}"/bmigunov/luxdesk-configs/sparse/usr/. /usr | \
             systemd-cat -p info -t $0
 
     mutt_accounts_obtain
@@ -68,31 +83,10 @@ function bladerf_binaries_install()
     rm -rf build
     mkdir -p -v build && pushd build
     cmake ..
-    make
-    sudo make install
-    make clean
+    make_build_install_clean
     printf "/usr/local/lib\n/usr/local/lib64\n" | \
     sudo tee /etc/ld.so.conf.d/local.conf
     sudo ldconfig
-    popd
-    popd
-}
-
-function srsran_4g_install()
-{
-    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-    echo "Building & installing srsRAN..."
-
-    pushd "${SRC_DIR}/srsran/srsRAN_4G"
-    rm -rf build
-    mkdir -p -v build && pushd build
-    cmake ..
-    make
-    make test
-    sudo make install
-    sudo srsran_install_configs.sh user
-    make clean
-    rm -rf build
     popd
     popd
 }
@@ -103,9 +97,7 @@ function translate_shell_install()
     echo "Building & installing translate-shell..."
 
     pushd "${SRC_DIR}/soimort/translate-shell"
-    make
-    sudo make install
-    make clean
+    make_build_install_clean
     popd
 }
 
@@ -115,9 +107,7 @@ function qdl_install()
     echo "Building & installing qdl..."
 
     pushd "${SRC_DIR}/qualcomm/qdl"
-    make
-    sudo make install
-    make clean
+    make_build_install_clean
     popd
 }
 
@@ -127,9 +117,7 @@ function xkblayout_state_install()
     echo "Building & installing xkblayout-state..."
 
     pushd "${SRC_DIR}/nonpop/xkblayout-state"
-    make
-    sudo make install
-    make clean
+    make_build_install_clean
     popd
 }
 
@@ -141,9 +129,7 @@ function openvpn3_install()
     pushd "${SRC_DIR}/OpenVPN/openvpn3-linux"
     ./bootstrap.sh
     ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
-    make
-    sudo make install
-    make clean
+    make_build_install_clean
 
     sudo groupadd -r openvpn
     sudo useradd -r -s /sbin/nologin -g openvpn openvpn
@@ -160,18 +146,14 @@ function yate_build_and_install()
     pushd "${SRC_DIR}/bmigunov/yate"
     ./autogen.sh
     ./configure
-    make
-    sudo make install-noapi
-    make clean
+    make_build_install_clean
     popd
 
     echo "Building & installing yateBTS..."
     pushd "${SRC_DIR}/bmigunov/yatebts"
     ./autogen.sh
     ./configure
-    make
-    sudo make install
-    make clean
+    make_build_install_clean
     popd
 
     sudo addgroup yate
@@ -207,9 +189,7 @@ function swayfx_build_and_install()
 
     pushd "${SRC_DIR}/WillPower3309/swayfx"
     meson build
-    ninja -C build
-    sudo ninja -C build install
-    ninja -C build clean
+    ninja_build_install_clean
     sudo mkdir -p -v /usr/share/wayland-sessions
     sudo cp sway.desktop /usr/share/wayland-sessions
     popd
@@ -227,9 +207,7 @@ function i3blocks_install()
     git pull
     ./autogen.sh
     ./configure
-    make
-    sudo make install
-    make clean
+    make_build_install_clean
     popd
 }
 
@@ -246,33 +224,16 @@ function i3blocks_contrib_install()
     sudo mkdir -p -v "${I3_BLOCKS_BLOCKLETS_DIR}"
 
     for BLOCKLET in "${I3BLOCK_BLOCKLETS[@]}"; do
-        sudo cp "${BLOCKLET}" "${I3_BLOCKS_BLOCKLETS_DIR}"
+        sudo cp ${BLOCKLET}/${BLOCKLET} ${I3_BLOCKS_BLOCKLETS_DIR}
     done
 
-    git checkout bmigunov-github/mpd
-    sudo cp mpd/scripts/* "${I3_BLOCKS_BLOCKLETS_DIR}"
+    git checkout bmigunov-sway_calendar
+    sudo cp sway_calendar/sway_calendar ${I3_BLOCKS_BLOCKLETS_DIR}
+
+    git checkout bmigunov-sway_klayout
+    sudo cp sway_klayout/sway_klayout ${I3_BLOCKS_BLOCKLETS_DIR}
 
     git checkout master
-    popd
-}
-
-function ghidra_build_and_install()
-{
-    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-    echo "Building & installing ghidra"
-
-    source "${HOME}"/.bashrc
-    sdk install gradle 7.6
-    source "${HOME}"/.bashrc
-    rm "${HOME}"/.zshrc
-
-    sudo update-alternatives --set java \
-                             /usr/lib/jvm/temurin-17-jdk-amd64/bin/java
-
-    pushd "${SRC_DIR}/NationalSecurityAgency/ghidra"
-    gradle -I gradle/support/fetchDependencies.gradle init
-    gradle buildGhidra
-    7z x -tzip -o"${HOME}"/.local/opt build/dist/ghidra_*.zip
     popd
 }
 
@@ -283,9 +244,7 @@ function swaylock_effects_build_and_install()
 
     pushd "${SRC_DIR}/mortie/swaylock-effects"
     meson build
-    ninja -C build
-    sudo ninja -C build install
-    ninja -C build clean
+    ninja_build_install_clean
     popd
 }
 
@@ -305,26 +264,14 @@ function sources_get()
     GAMES_LIST=$(dirname "$0")"/../data/git/${PREFIX}games.list"
 
     while read -a REPO; do
-        if [ ${GIT_PREFER_SSH} -eq 1 ]; then
-            if [ "${REPO[0]}" != "-" ]; then
-                git_repo_clone "${REPO[0]}"
-            else
-                git_repo_clone "${REPO[1]}"
-            fi
-        else
+        if ! git_repo_clone "${REPO[0]}" ; then
             git_repo_clone "${REPO[1]}"
         fi
     done <"${COMMON_LIST}"
 
     if [ $NO_GUI = 0 ]; then
         while read -a REPO; do
-            if [ ${GIT_PREFER_SSH} -eq 1 ]; then
-                if [ "${REPO[0]}" != "-" ]; then
-                    git_repo_clone "${REPO[0]}"
-                else
-                    git_repo_clone "${REPO[1]}"
-                fi
-            else
+            if ! git_repo_clone "${REPO[0]}" ; then
                 git_repo_clone "${REPO[1]}"
             fi
         done <"${GUI_LIST}"
@@ -332,13 +279,7 @@ function sources_get()
 
     if [ $NO_GAMES = 0 ]; then
         while read -a REPO; do
-            if [ ${GIT_PREFER_SSH} -eq 1 ]; then
-                if [ "${REPO[0]}" != "-" ]; then
-                    git_repo_clone "${REPO[0]}"
-                else
-                    git_repo_clone "${REPO[1]}"
-                fi
-            else
+            if ! git_repo_clone "${REPO[0]}" ; then
                 git_repo_clone "${REPO[1]}"
             fi
         done <"${GAMES_LIST}"
@@ -352,7 +293,6 @@ function build_and_install_from_sources()
     luxdesk_configs_install
     mbedtls_install
     bladerf_binaries_install
-#     srsran_4g_install
     translate_shell_install
     qdl_install
     xkblayout_state_install
@@ -364,8 +304,7 @@ function build_and_install_from_sources()
     if [ ${NO_GUI} = 0 ]; then
         swayfx_build_and_install
         i3blocks_install
-#         i3blocks_contrib_install
-#         ghidra_build_and_install
+        i3blocks_contrib_install
         swaylock_effects_build_and_install
     fi
 }
