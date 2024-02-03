@@ -15,8 +15,6 @@ export GITHUB_KEY_RW_TOKEN=
 export MUTT_ACCOUNTS_GPG_REMOTE=
 SSH_KEY_PASS=""
 
-export GIT_PREFER_SSH=0
-
 REQUIRED_OS_NAME=Linux
 REQUIRED_DISTRO_NAME=Debian
 
@@ -27,7 +25,6 @@ LONGOPT_NO_GUI="--no_gui"
 LONGOPT_KEY_RW_TOKEN="--key_rw_token"
 LONGOPT_SSH_KEY_PASS="--ssh_key_pass"
 LONGOPT_MUTT_ACCOUNTS_REMOTE="--mutt_accounts_remote"
-LONGOPT_GIT_PREFER_SSH="--git_prefer_ssh"
 
 USAGE="post-install.sh\nA script to set up a freshly installed system.\n\t\
 $LONGOPT_HELP, $SHORTOPT_HELP: Print help message.\n\t$LONGOPT_NO_GAMES: Do \
@@ -35,8 +32,7 @@ not install games.\n\t$LONGOPT_NO_GUI: Do not install GUI applications and X \
 server.\n\t$LONGOPT_KEY_RW_TOKEN: GitHub personal access token to read and \
 write public keys.\n\t$LONGOPT_SSH_KEY_PASS: New SSH key passphrase (empty by \
 default).\n\t$LONGOPT_MUTT_ACCOUNTS_REMOTE: Link to the mutt 'accounts.gpg' \
-file to download\n\t$LONGOPT_GIT_PREFER_SSH: Prefer ssh method of fetching \
-sources via git.\n"
+file to download\n"
 
 
 function options_check()
@@ -62,9 +58,6 @@ function options_check()
         elif [ ${1} = ${LONGOPT_MUTT_ACCOUNTS_REMOTE} ]; then
             export MUTT_ACCOUNTS_GPG_REMOTE="${2}"
             shift 2
-        elif [ ${1} = ${LONGOPT_GIT_PREFER_SSH} ]; then
-            export GIT_PREFER_SSH=1
-            shift 1
         else
             break;
         fi
@@ -170,7 +163,6 @@ function init()
     source $(dirname "$0")"/deb.sh"
     source $(dirname "$0")"/device.sh"
     source $(dirname "$0")"/directories.sh"
-    source $(dirname "$0")"/emu-land.sh"
     source $(dirname "$0")"/fonts.sh"
     source $(dirname "$0")"/git.sh"
     source $(dirname "$0")"/language_servers.sh"
@@ -178,7 +170,6 @@ function init()
     source $(dirname "$0")"/mime.sh"
     source $(dirname "$0")"/mpd.sh"
     source $(dirname "$0")"/npm.sh"
-    source $(dirname "$0")"/old-games.sh"
     source $(dirname "$0")"/opt.sh"
     source $(dirname "$0")"/pipx.sh"
     source $(dirname "$0")"/root.sh"
@@ -236,11 +227,6 @@ bash_setup
 mpd_setup
 
 bladerf_x40_images_download
-
-if [ $NO_GAMES = 0 ]; then
-    emu_land_fetch
-    old_games_fetch
-fi
 
 fonts_install
 
