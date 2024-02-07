@@ -290,7 +290,6 @@ function build_and_install_from_sources()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
-    luxdesk_configs_install
     mbedtls_install
     bladerf_binaries_install
     translate_shell_install
@@ -307,4 +306,6 @@ function build_and_install_from_sources()
         i3blocks_contrib_install
         swaylock_effects_build_and_install
     fi
+
+    luxdesk_configs_install
 }
