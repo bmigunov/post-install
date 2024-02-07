@@ -97,7 +97,7 @@ function directories_create()
 
     if [ -d /workspace ]; then
         echo "/workpace partition exists"
-        sudo chown -R ${CURRENT_USER}:${CURRENT_USER} /mnt/workspace
+        sudo chown ${CURRENT_USER}:${CURRENT_USER} /workspace
         ln -s /workspace "${WORKSPACE_DIR}"
     fi
 
