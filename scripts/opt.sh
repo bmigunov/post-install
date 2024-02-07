@@ -12,7 +12,7 @@
 source $(dirname "${0}")"/mime.sh"
 
 
-USER_OPT_DIR=/opt/${USER}
+USER_OPT_DIR=/opt/${CURRENT_USER}
 LOCAL_OPT_DIR="${HOME}/.local/opt"
 
 
@@ -82,7 +82,7 @@ function opt_install()
     echo "Installing opt apps from the archives..."
 
     sudo mkdir -p -v ${USER_OPT_DIR}
-    sudo chown -r ${USER}:${USER} ${USER_OPT_DIR}
+    sudo chown -R ${CURRENT_USER}:${CURRENT_USER} ${USER_OPT_DIR}
     ln -s "${USER_OPT_DIR}" "${LOCAL_OPT_DIR}"
 
     if [ ${1} ]; then

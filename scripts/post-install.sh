@@ -13,6 +13,7 @@ export NO_GUI=0
 export NO_GAMES=0
 export GITHUB_KEY_RW_TOKEN=
 export MUTT_ACCOUNTS_GPG_REMOTE=
+export CURRENT_USER=$(id -run)
 SSH_KEY_PASS=""
 
 REQUIRED_OS_NAME=Linux

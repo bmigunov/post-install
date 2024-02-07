@@ -157,7 +157,7 @@ function yate_build_and_install()
     popd
 
     sudo addgroup yate
-    sudo usermod -a -G yate "$USER"
+    sudo usermod -a -G yate "${CURRENT_USER}"
 }
 
 function ly_build_and_install()
