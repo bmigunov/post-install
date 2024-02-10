@@ -86,8 +86,9 @@ NEOVIM_BACKUP_DIR="${BACKUP_DIR}/nvim"
 
 export POST_INSTALL_BACKUP_DIR="${BACKUP_DIR}/post-install"
 
-
 LESSHST_DIR="${XDG_STATE_HOME}/less"
+
+NCMPCPP_LYRICS_DIR="${HOME}/.cache/ncmpcpp/lyrics"
 
 
 function directories_create()
@@ -119,5 +120,6 @@ function directories_create()
                 "${SAVED_LOGS_DIR}" "${IMG_DIR}" "${BACKUP_DIR}"               \
                 "${NEOVIM_BACKUP_DIR}" "${POST_INSTALL_BACKUP_DIR}"            \
                 "${LESSHST_DIR}" "${XDG_CONFIG_HOME}" "${XDG_DATA_HOME}"       \
-                "${XDG_STATE_HOME}" "${XDG_CACHE_HOME}" "${SAVED_VIDEO_DIR}"
+                "${XDG_STATE_HOME}" "${XDG_CACHE_HOME}" "${SAVED_VIDEO_DIR}"   \
+                "${NCMPCPP_LYRICS_DIR}"
 }
