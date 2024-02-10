@@ -25,18 +25,18 @@ function pipx_packages_install()
     GAMES_LIST=$(dirname "$0")"/../data/pipx/${PREFIX}games.list"
 
     for PACKAGE in $(cat ${COMMON_LIST}); do
-        pipx install "${PACKAGE}"
+        pip install "${PACKAGE}"
     done
 
     if [ ${NO_GUI} = 0 ]; then
         for PACKAGE in $(cat ${GUI_LIST}); do
-            pipx install "${PACKAGE}"
+            pip install "${PACKAGE}"
         done
     fi
 
     if [ ${NO_GAMES} = 0 ]; then
         for PACKAGE in $(cat ${GAMES_LIST}); do
-            pipx install "${PACKAGE}"
+            pip install "${PACKAGE}"
         done
     fi
 }
