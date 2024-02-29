@@ -208,8 +208,6 @@ cargo_crates_install
 
 sudo apt-get purge yt-dlp
 
-pip_packages_install
-
 npm_packages_install
 
 opt_install
@@ -225,6 +223,8 @@ fi
 
 sources_get
 build_and_install_from_sources
+
+pip_packages_install
 
 bash_setup
 mpd_setup
