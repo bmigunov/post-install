@@ -182,19 +182,6 @@ function vim_plug_install()
        "${XDG_DATA_HOME}/nvim/site/autoload/plug.vim"
 }
 
-function swayfx_build_and_install()
-{
-    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-    echo "Building & installing swayfx..."
-
-    pushd "${SRC_DIR}/WillPower3309/swayfx"
-    meson build
-    ninja_build_install_clean
-    sudo mkdir -p -v /usr/share/wayland-sessions
-    sudo cp sway.desktop /usr/share/wayland-sessions
-    popd
-}
-
 function i3blocks_install()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
@@ -301,7 +288,6 @@ function build_and_install_from_sources()
     vim_plug_install
 
     if [ ${NO_GUI} = 0 ]; then
-        swayfx_build_and_install
         i3blocks_install
         i3blocks_contrib_install
         swaylock_effects_build_and_install
