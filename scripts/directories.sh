@@ -28,10 +28,12 @@ fi
 AUDIO_DIR="${HOME}/Audio"
 MUSIC_DIR="${AUDIO_DIR}/Music"
 
-BOOKS_DIR="${HOME}/Books"
-
 DOCUMENTS_DIR="${HOME}/Documents"
 DOCUMENTS_JOB_DIR="${DOCUMENTS_DIR}/job"
+
+BOOKS_DIR="${DOCUMENTS_DIR}/Books"
+
+OBSIDIAN_DIR="${DOCUMENTS_DIR}/obsidian"
 
 DOWNLOADS_DIR="${HOME}/Downloads"
 TELEGRAM_DOWNLOADS_DIR="${DOWNLOADS_DIR}/Telegram"
@@ -59,6 +61,10 @@ SCREENSHOTS_DIR="${PICTURES_DIR}/screenshots"
 WALLPAPERS_DIR="${PICTURES_DIR}/wallpapers"
 
 TORRENTS_DIR="${HOME}/Torrents"
+TORRENTS_SERIES_DIR="${TORRENTS_DIR}/series"
+TORRENTS_MUSIC_DIR="${TORRENTS_DIR}/music"
+TORRENTS_MOVIES_DIR="${TORRENTS_DIR}/movies"
+TORRENTS_GAMES_DIR="${TORRENTS_DIR}/games"
 FINISHED_TORRENTS_DIR="${TORRENTS_DIR}/finished"
 
 VIDEO_DIR="${HOME}/Video"
@@ -66,13 +72,13 @@ PERSONAL_VIDEO_DIR="${VIDEO_DIR}/personal"
 SAVED_VIDEO_DIR="${VIDEO_DIR}/saved"
 MOVIES_DIR="${VIDEO_DIR}/movies"
 SERIES_DIR="${VIDEO_DIR}/series"
+SHOTCUT_DIR="${VIDEO_DIR}/shotcut"
 
 WORKSPACE_DIR="${HOME}/workspace"
 WORKSPACE_JOB_DIR="${WORKSPACE_DIR}/job"
 GHIDRA_DIR="${WORKSPACE_DIR}/ghidra"
 ANDROID_STUDIO_SDK_DIR="${WORKSPACE_DIR}/android_studio/sdk"
 ANDROID_STUDIO_PROJECTS_DIR="${WORKSPACE_DIR}/android_studio/projects"
-OBSIDIAN_DIR="${WORKSPACE_DIR}/obsidian"
 
 export SRC_DIR="${WORKSPACE_DIR}/src"
 
@@ -121,5 +127,7 @@ function directories_create()
                 "${NEOVIM_BACKUP_DIR}" "${POST_INSTALL_BACKUP_DIR}"            \
                 "${LESSHST_DIR}" "${XDG_CONFIG_HOME}" "${XDG_DATA_HOME}"       \
                 "${XDG_STATE_HOME}" "${XDG_CACHE_HOME}" "${SAVED_VIDEO_DIR}"   \
-                "${NCMPCPP_LYRICS_DIR}"
+                "${NCMPCPP_LYRICS_DIR}" "${SHOTCUT_DIR}"                       \
+                "${TORRENTS_SERIES_DIR}" "${TORRENTS_MUSIC_DIR}"               \
+                "${TORRENTS_MOVIES_DIR}" "${TORRENTS_GAMES_DIR}"
 }
