@@ -172,7 +172,7 @@ function init()
     source $(dirname "$0")"/mpd.sh"
     source $(dirname "$0")"/npm.sh"
     source $(dirname "$0")"/opt.sh"
-    source $(dirname "$0")"/pipx.sh"
+    source $(dirname "$0")"/pip.sh"
     source $(dirname "$0")"/root.sh"
     source $(dirname "$0")"/snap.sh"
     source $(dirname "$0")"/sources.sh"
@@ -206,7 +206,7 @@ snap_packages_install
 
 cargo_crates_install
 
-pipx_packages_install
+pip_packages_install
 
 npm_packages_install
 

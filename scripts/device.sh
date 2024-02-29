@@ -12,7 +12,7 @@
 source $(dirname "${0}")"/deb.sh"
 source $(dirname "${0}")"/snap.sh"
 source $(dirname "${0}")"/cargo.sh"
-source $(dirname "${0}")"/pipx.sh"
+source $(dirname "${0}")"/pip.sh"
 source $(dirname "${0}")"/npm.sh"
 source $(dirname "${0}")"/opt.sh"
 source $(dirname "${0}")"/sources.sh"
@@ -72,7 +72,7 @@ function device_setup()
 
     cargo_crates_install device
 
-    pipx_packages_install device
+    pip_packages_install device
 
     npm_packages_install device
 

@@ -4,25 +4,25 @@
 #   Bogdan Migunov <bogdanmigunov@yandex.ru>
 #
 # Description:
-#   Set of pipx-related scripts.
+#   Set of pip-related scripts.
 
 
 
 
-function pipx_packages_install()
+function pip_packages_install()
 {
     PREFIX=
 
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-    echo "Installing pipx packages..."
+    echo "Installing pip packages..."
 
     if [ ${1} ]; then
         PREFIX="${1}-"
     fi
 
-    COMMON_LIST=$(dirname "$0")"/../data/pipx/${PREFIX}common.list"
-    GUI_LIST=$(dirname "$0")"/../data/pipx/${PREFIX}gui.list"
-    GAMES_LIST=$(dirname "$0")"/../data/pipx/${PREFIX}games.list"
+    COMMON_LIST=$(dirname "$0")"/../data/pip/${PREFIX}common.list"
+    GUI_LIST=$(dirname "$0")"/../data/pip/${PREFIX}gui.list"
+    GAMES_LIST=$(dirname "$0")"/../data/pip/${PREFIX}games.list"
 
     for PACKAGE in $(cat ${COMMON_LIST}); do
         pip install "${PACKAGE}"
