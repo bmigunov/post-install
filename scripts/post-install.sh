@@ -206,6 +206,8 @@ snap_packages_install
 
 cargo_crates_install
 
+sudo apt-get purge yt-dlp
+
 pip_packages_install
 
 npm_packages_install
