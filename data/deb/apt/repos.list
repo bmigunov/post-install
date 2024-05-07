@@ -1,4 +1,3 @@
-deb https://download.sublimetext.com/ apt/stable/
 deb [arch=amd64] https://download.docker.com/linux/debian bookworm stable
 deb https://packages.adoptium.net/artifactory/deb bookworm main
 deb [arch=amd64,arm64] https://c.quick-lint-js.com/debian experimental main
