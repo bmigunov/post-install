@@ -4,7 +4,7 @@ git@github.com:soimort/translate-shell.git https://github.com/soimort/translate-
 git@github.com:Nuand/bladeRF.git https://github.com/Nuand/bladeRF.git
 git@github.com:srsran/srsRAN_4G.git https://github.com/srsran/srsRAN_4G.git
 - https://git.kernel.org/pub/scm/network/ofono/ofono.git
-- https://git.linaro.org/landing-teams/working/qualcomm/qdl.git
+- https://git.codelinaro.org/linaro/qcomlt/qdl
 git@github.com:magicmonty/bash-git-prompt.git https://github.com/magicmonty/bash-git-prompt.git
 git@github.com:bmigunov/luxdesk-configs https://github.com/bmigunov/luxdesk-configs
 git@github.com:OpenVPN/openvpn3-linux.git https://github.com/OpenVPN/openvpn3-linux.git
