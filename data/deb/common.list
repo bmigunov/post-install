@@ -21,7 +21,6 @@ soapysdr-tools
 bluetooth
 libasound2
 alsa-utils
-pulseaudio
 pamix
 gpm
 cups
@@ -54,7 +53,6 @@ gcc
 binutils-arm-linux-gnueabi
 gcc-arm-linux-gnueabi
 g++
-rust-all
 flex
 bison
 perl
@@ -274,3 +272,7 @@ pipewire
 i2c-tools
 ncdu
 ftp
+lhasa
+arj
+unace
+iat

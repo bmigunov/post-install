@@ -8,10 +8,8 @@ libcairo2
 libgdk-pixbuf2.0-bin
 xwayland
 im-config
-suckless-tools
 conky-all
 kitty
-sublime-text
 wxhexeditor
 qtcreator
 lazarus
@@ -20,7 +18,6 @@ dosbox
 wine
 wireshark
 gnuradio
-grimshot
 imv
 gimp
 inkscape
@@ -37,14 +34,11 @@ ttf-mscorefonts-installer
 fonts-font-awesome
 fonts-unifont
 mpv
-schism
 ffmpeg
 shotcut
 obs-studio
 rtmpdump
-pavucontrol
 keepassxc
-gsimplecal
 thunderbird
 element-desktop
 remmina
@@ -54,14 +48,7 @@ gqrx-sdr
 python3-pyqt5
 python3-pyqtgraph
 electrum
-kanshi
-wdisplays
-swaybg
 qt5ct
-swayidle
-mako-notifier
-tofi
-wvkbd
 xdg-desktop-portal
 xdg-desktop-portal-wlr
 sweethome3d
@@ -69,4 +56,6 @@ sweethome3d-furniture
 sweethome3d-furniture-editor
 sweethome3d-textures-editor
 sweethome3d-furniture-nonfree
-sway
+krename
+meld
+kde-plasma-desktop
