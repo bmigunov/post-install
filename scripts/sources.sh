@@ -13,11 +13,6 @@ source $(dirname "${0}")"/git.sh"
 source $(dirname "${0}")"/mutt.sh"
 
 
-I3_BLOCKS_BLOCKLETS_DIR="/usr/share/i3blocks"
-declare -a I3BLOCK_BLOCKLETS=("disk-io" "memory" "cpu_usage" "temperature" \
-                              "metars" "volume-pipewire")
-
-
 function make_build_install_clean()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
@@ -106,17 +101,7 @@ function qdl_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Building & installing qdl..."
 
-    pushd "${SRC_DIR}/qualcomm/qdl"
-    make_build_install_clean
-    popd
-}
-
-function xkblayout_state_install()
-{
-    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-    echo "Building & installing xkblayout-state..."
-
-    pushd "${SRC_DIR}/nonpop/xkblayout-state"
+    pushd "${SRC_DIR}/qcomlt/qdl"
     make_build_install_clean
     popd
 }
@@ -160,18 +145,6 @@ function yate_build_and_install()
     sudo usermod -a -G yate "${CURRENT_USER}"
 }
 
-function ly_build_and_install()
-{
-    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-    echo "Building & installing ly..."
-
-    pushd "${SRC_DIR}/fairyglade/ly"
-    make
-    sudo make install installsystemd
-    make clean
-    popd
-}
-
 function vim_plug_install()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
@@ -180,59 +153,6 @@ function vim_plug_install()
     mkdir -p -v "${XDG_DATA_HOME}/nvim/site/autoload"
     cp --backup=none -v "${SRC_DIR}/junegunn/vim-plug/plug.vim" \
        "${XDG_DATA_HOME}/nvim/site/autoload/plug.vim"
-}
-
-function i3blocks_install()
-{
-    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-    echo "Building & installing i3blocks..."
-
-    pushd "${SRC_DIR}/vivien/i3blocks"
-    git remote add bmigunov-github git@github.com:bmigunov/i3blocks.git
-    git fetch --all
-    git checkout ticker-support
-    git pull
-    ./autogen.sh
-    ./configure
-    make_build_install_clean
-    popd
-}
-
-function i3blocks_contrib_install()
-{
-    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-    echo "Installing i3blocks 'blocklets' from 'i3blocks-contrib' git repo"
-
-    pushd "${SRC_DIR}/vivien/i3blocks-contrib"
-    git remote add bmigunov-github git@github.com:bmigunov/i3blocks-contrib.git
-    git fetch --all
-    git pull
-
-    sudo mkdir -p -v "${I3_BLOCKS_BLOCKLETS_DIR}"
-
-    for BLOCKLET in "${I3BLOCK_BLOCKLETS[@]}"; do
-        sudo cp ${BLOCKLET}/${BLOCKLET} ${I3_BLOCKS_BLOCKLETS_DIR}
-    done
-
-    git checkout bmigunov-sway_calendar
-    sudo cp sway_calendar/sway_calendar ${I3_BLOCKS_BLOCKLETS_DIR}
-
-    git checkout bmigunov-sway_klayout
-    sudo cp sway_klayout/sway_klayout ${I3_BLOCKS_BLOCKLETS_DIR}
-
-    git checkout master
-    popd
-}
-
-function swaylock_effects_build_and_install()
-{
-    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-    echo "Building & installing swaylock-effects"
-
-    pushd "${SRC_DIR}/mortie/swaylock-effects"
-    meson build
-    ninja_build_install_clean
-    popd
 }
 
 function sources_get()
@@ -281,17 +201,9 @@ function build_and_install_from_sources()
     bladerf_binaries_install
     translate_shell_install
     qdl_install
-    xkblayout_state_install
     openvpn3_install
     yate_build_and_install
-    ly_build_and_install
     vim_plug_install
-
-    if [ ${NO_GUI} = 0 ]; then
-        i3blocks_install
-        i3blocks_contrib_install
-        swaylock_effects_build_and_install
-    fi
 
     luxdesk_configs_install
 }
