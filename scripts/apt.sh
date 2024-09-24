@@ -35,7 +35,7 @@ function apt_keyring_append()
     while read -a KEYRING_REMOTE; do
         echo "Fetching repository signing keyring..."
 
-        if [ "${KEYRING_REMOTE[1]}" != "-" ]; then
+        if [ "${KEYRING_REMOTE[1]}" = "-" ]; then
             sudo wget --no-check-certificate --content-disposition -P \
                       "${KEYRINGS_DIR}" "${KEYRING_REMOTE[0]}"
         else
