@@ -46,6 +46,7 @@ else
         touch /home/"${TARGET_USER}"/.local/share/bash/history
         wget -P /home/"${TARGET_USER}" --content-disposition "https://raw.githubusercontent.com/bmigunov/luxdesk-configs/refs/heads/master/sparse/home/user/.profile"
         wget -P /home/"${TARGET_USER}" --content-disposition "https://raw.githubusercontent.com/bmigunov/luxdesk-configs/refs/heads/master/sparse/home/user/.bashrc"
+        wget -P /home/"${TARGET_USER}" --content-disposition "https://raw.githubusercontent.com/bmigunov/luxdesk-configs/refs/heads/master/sparse/home/user/.bash_logout"
         wget -P /home/"${TARGET_USER}/.config/bash" --content-disposition "https://raw.githubusercontent.com/bmigunov/luxdesk-configs/refs/heads/master/sparse/home/user/.config/bash/bash_aliases"
         wget -P /home/"${TARGET_USER}/.config" --content-disposition "https://raw.githubusercontent.com/bmigunov/luxdesk-configs/refs/heads/master/sparse/home/user/.config/dircolors"
 
