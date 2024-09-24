@@ -152,21 +152,21 @@ function init()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
-    source $(dirname "$0")"/scripts/directories.sh"
-    source $(dirname "$0")"/scripts/sources.sh"
-    source $(dirname "$0")"/scripts/configs.sh"
-    source $(dirname "$0")"/scripts/apt.sh"
-    source $(dirname "$0")"/scripts/deb.sh"
-    source $(dirname "$0")"/scripts/snap.sh"
-    source $(dirname "$0")"/scripts/flatpak.sh"
-    source $(dirname "$0")"/scripts/npm.sh"
-    source $(dirname "$0")"/scripts/pip.sh"
-    source $(dirname "$0")"/scripts/pipx.sh"
-    source $(dirname "$0")"/scripts/opt.sh"
-    source $(dirname "$0")"/scripts/bladerf.sh"
-    source $(dirname "$0")"/scripts/fonts.sh"
-    source $(dirname "$0")"/scripts/systemd.sh"
-    source $(dirname "$0")"/scripts/mime.sh"
+    source $(dirname "$0")"/directories.sh"
+    source $(dirname "$0")"/sources.sh"
+    source $(dirname "$0")"/configs.sh"
+    source $(dirname "$0")"/apt.sh"
+    source $(dirname "$0")"/deb.sh"
+    source $(dirname "$0")"/snap.sh"
+    source $(dirname "$0")"/flatpak.sh"
+    source $(dirname "$0")"/npm.sh"
+    source $(dirname "$0")"/pip.sh"
+    source $(dirname "$0")"/pipx.sh"
+    source $(dirname "$0")"/opt.sh"
+    source $(dirname "$0")"/bladerf.sh"
+    source $(dirname "$0")"/fonts.sh"
+    source $(dirname "$0")"/systemd.sh"
+    source $(dirname "$0")"/mime.sh"
 
     tabs 4
     clear
