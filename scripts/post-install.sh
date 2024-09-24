@@ -230,6 +230,9 @@ mime_types_setup
 
 device_setup
 
+sudo update-alternatives --set java \
+                         /usr/lib/jvm/temurin-21-jdk-amd64/bin/java
+
 sudo sensors-detect
 
 while [ true ]; do
