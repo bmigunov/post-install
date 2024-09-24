@@ -39,7 +39,7 @@ function flatpak_packages_install()
 
     if [ ${NO_GUI} = 0 ]; then
         while read -a PACKAGE; do
-            flatpak install "${PACKAGE[0]}" "${PACKAGE[1]}"
+            flatpak install -y "${PACKAGE[0]}" "${PACKAGE[1]}"
         done <"${GUI_LIST}"
     fi
 }
