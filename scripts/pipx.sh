@@ -4,7 +4,7 @@
 #   Bogdan Migunov <bogdanmigunov@yandex.ru>
 #
 # Description:
-#   Set of pip-related scripts.
+#   Set of pipx-related scripts.
 
 
 

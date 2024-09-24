@@ -160,7 +160,6 @@ function init()
     source $(dirname "$0")"/snap.sh"
     source $(dirname "$0")"/flatpak.sh"
     source $(dirname "$0")"/npm.sh"
-    source $(dirname "$0")"/pip.sh"
     source $(dirname "$0")"/pipx.sh"
     source $(dirname "$0")"/opt.sh"
     source $(dirname "$0")"/bladerf.sh"
@@ -219,7 +218,6 @@ flatpak_packages_install
 
 npm_packages_install
 
-pip_packages_install
 pipx_packages_install
 
 opt_install

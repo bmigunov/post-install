@@ -12,7 +12,6 @@
 source $(dirname "${0}")"/deb.sh"
 source $(dirname "${0}")"/snap.sh"
 source $(dirname "${0}")"/flatpak.sh"
-source $(dirname "${0}")"/pip.sh"
 source $(dirname "${0}")"/pipx.sh"
 source $(dirname "${0}")"/npm.sh"
 source $(dirname "${0}")"/opt.sh"
@@ -73,7 +72,6 @@ function device_setup()
     flatpak_remotes_add device
     flatpak_packages_install device
 
-    pip_packages_install device
     pipx_packages_install device
 
     npm_packages_install device
