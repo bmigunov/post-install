@@ -11,12 +11,12 @@
 
 source $(dirname "${0}")"/deb.sh"
 source $(dirname "${0}")"/snap.sh"
-source $(dirname "${0}")"/cargo.sh"
+source $(dirname "${0}")"/flatpak.sh"
 source $(dirname "${0}")"/pip.sh"
+source $(dirname "${0}")"/pipx.sh"
 source $(dirname "${0}")"/npm.sh"
 source $(dirname "${0}")"/opt.sh"
 source $(dirname "${0}")"/sources.sh"
-
 
 LUXDESK_CONFIGS_DELL_G3_REPO_URI=\
 "git@github.com:bmigunov/luxdesk-configs-dell-g3"
@@ -34,21 +34,19 @@ function device_setup()
         case $REPLY in
         1)
             git_repo_clone "${LUXDESK_CONFIGS_DELL_G3_REPO_URI}"
-            cp --backup=none -rv "${SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/sparse/home/user/. ~ | \
+            cp --backup=none -rv "${LXD_SRC_DIR}/bmigunov/luxdesk-configs-dell-g3/sparse/home/user/.config" "${HOME}" | \
             systemd-cat -p info -t $0
-            sudo cp --backup=none -rv "${SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/sparse/etc/. /etc | \
-            systemd-cat -p info -t $0
-            cp -rnv "${SRC_DIR}"/bmigunov/luxdesk-configs-dell-g3/post-install/* \
+
+            cp -rnv "${SRC_DIR}/bmigunov/luxdesk-configs-dell-g3/post-install/"* \
                     $(dirname "$0")'/..'
             break
             ;;
         2)
             git_repo_clone "${LUXDESK_CONFIGS_RYZEN7_DESKTOP_REPO_URI}"
-            cp --backup=none -rv "${SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/home/user/. ~ | \
+            cp --backup=none -rv "${LXD_SRC_DIR}/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/home/user/.config" "${HOME}" | \
             systemd-cat -p info -t $0
-            sudo cp --backup=none -rv "${SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/etc/. /etc | \
-            systemd-cat -p info -t $0
-            cp -rnv "${SRC_DIR}"/bmigunov/luxdesk-configs-ryzen7-desktop/post-install/* \
+
+            cp -rnv "${SRC_DIR}/bmigunov/luxdesk-configs-ryzen7-desktop/post-install/"* \
                     $(dirname "$0")'/..'
             break
             ;;
@@ -66,19 +64,21 @@ function device_setup()
         esac
     done
 
+    sources_get device
+
     deb_packages_install device
 
     snap_packages_install device
 
-    cargo_crates_install device
+    flatpak_remotes_add device
+    flatpak_packages_install device
 
     pip_packages_install device
+    pipx_packages_install device
 
     npm_packages_install device
 
     opt_install device
-
-    sources_get device
 
     ./device-post-install.sh
 }

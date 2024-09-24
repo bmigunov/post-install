@@ -11,8 +11,6 @@
 
 source $(dirname "${0}")"/mime.sh"
 
-
-USER_OPT_DIR=/opt/${CURRENT_USER}
 LOCAL_OPT_DIR="${HOME}/.local/opt"
 
 
@@ -81,17 +79,12 @@ function opt_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Installing opt apps from the archives..."
 
-    sudo mkdir -p -v ${USER_OPT_DIR}
-    sudo chown -R ${CURRENT_USER}:${CURRENT_USER} ${USER_OPT_DIR}
-    ln -s "${USER_OPT_DIR}" "${LOCAL_OPT_DIR}"
-
-    if [ ${1} ]; then
+    if [ -n "${1}" ]; then
         PREFIX="${1}-"
     fi
 
     COMMON_LIST=$(dirname "$0")"/../data/opt/${PREFIX}common.list"
     GUI_LIST=$(dirname "$0")"/../data/opt/${PREFIX}gui.list"
-    GAMES_LIST=$(dirname "$0")"/../data/opt/${PREFIX}games.list"
 
     for REMOTE in $(cat ${COMMON_LIST}); do
         opt_fetch "${REMOTE}"
@@ -99,12 +92,6 @@ function opt_install()
 
     if [ ${NO_GUI} = 0 ]; then
         for REMOTE in $(cat ${GUI_LIST}); do
-            opt_fetch "${REMOTE}"
-        done
-    fi
-
-    if [ ${NO_GAMES} = 0 ]; then
-        for REMOTE in $(cat ${GAMES_LIST}); do
             opt_fetch "${REMOTE}"
         done
     fi

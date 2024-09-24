@@ -1,6 +1,0 @@
-deb [arch=amd64] https://download.docker.com/linux/debian bookworm stable
-deb https://packages.adoptium.net/artifactory/deb bookworm main
-deb [arch=amd64,arm64] https://c.quick-lint-js.com/debian experimental main
-deb [signed-by=/usr/share/keyrings/i2p-archive-keyring.gpg] https://deb.i2p.net/ bookworm main
-deb [arch=amd64 signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main
-deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main

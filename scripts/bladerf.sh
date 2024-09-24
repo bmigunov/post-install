@@ -9,7 +9,7 @@
 
 
 
-BLADERF_X40_IMAGES_DIR="${IMG_DIR}/bladerf/x40"
+BLADERF_X40_IMAGES_DIR="${LXD_IMG_DIR}/bladerf/x40"
 
 BLADERF_FX3_IMAGE_LATEST_REMOTE=\
 "https://www.nuand.com/fx3/bladeRF_fw_latest.img"

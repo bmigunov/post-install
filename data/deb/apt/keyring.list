@@ -1,3 +1,5 @@
-https://geti2p.net/_static/i2p-archive-keyring.gpg
-https://cli.github.com/packages/githubcli-archive-keyring.gpg
-https://packages.element.io/debian/element-io-archive-keyring.gpg
+https://geti2p.net/_static/i2p-archive-keyring.gpg -
+https://cli.github.com/packages/githubcli-archive-keyring.gpg -
+https://packages.element.io/debian/element-io-archive-keyring.gpg -
+https://packages.mozilla.org/apt/repo-signing-key.gpg packages.mozilla.org.asc
+https://packages.openvpn.net/packages-repo.gpg openvpn.asc

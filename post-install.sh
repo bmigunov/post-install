@@ -10,30 +10,28 @@
 
 
 export NO_GUI=0
-export NO_GAMES=0
 export GITHUB_KEY_RW_TOKEN=
 export MUTT_ACCOUNTS_GPG_REMOTE=
 export CURRENT_USER=$(id -run)
 SSH_KEY_PASS=""
 
-REQUIRED_OS_NAME=Linux
-REQUIRED_DISTRO_NAME=Debian
+REQUIRED_OS_NAME="Linux"
+REQUIRED_DISTRO_NAME="Debian"
 
 LONGOPT_HELP="--help"
 SHORTOPT_HELP="-h"
-LONGOPT_NO_GAMES="--no_games"
 LONGOPT_NO_GUI="--no_gui"
 LONGOPT_KEY_RW_TOKEN="--key_rw_token"
 LONGOPT_SSH_KEY_PASS="--ssh_key_pass"
 LONGOPT_MUTT_ACCOUNTS_REMOTE="--mutt_accounts_remote"
 
 USAGE="post-install.sh\nA script to set up a freshly installed system.\n\t\
-$LONGOPT_HELP, $SHORTOPT_HELP: Print help message.\n\t$LONGOPT_NO_GAMES: Do \
-not install games.\n\t$LONGOPT_NO_GUI: Do not install GUI applications and X \
-server.\n\t$LONGOPT_KEY_RW_TOKEN: GitHub personal access token to read and \
-write public keys.\n\t$LONGOPT_SSH_KEY_PASS: New SSH key passphrase (empty by \
-default).\n\t$LONGOPT_MUTT_ACCOUNTS_REMOTE: Link to the mutt 'accounts.gpg' \
-file to download\n"
+${LONGOPT_HELP}, ${SHORTOPT_HELP}: Print help message.\n\t${LONGOPT_NO_GUI}: \
+Do not install GUI applications and X server.\n\t${LONGOPT_KEY_RW_TOKEN}: \
+GitHub personal access token to read and write public keys.\n\t\
+${LONGOPT_SSH_KEY_PASS}: New SSH key passphrase.\n\t\
+${LONGOPT_MUTT_ACCOUNTS_REMOTE}: Link to the mutt 'accounts.gpg' file to \
+download\n"
 
 
 function options_check()
@@ -41,22 +39,19 @@ function options_check()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
     while [ true ]; do
-        if [ ${1} = ${LONGOPT_HELP} ] || [ ${1} = ${SHORTOPT_HELP} ]; then
+        if [ "${1}" = "${LONGOPT_HELP}" ] || [ "${1}" = "${SHORTOPT_HELP}" ]; then
             printf "${USAGE}"
             exit 0
-        elif [ ${1} = ${LONGOPT_NO_GAMES} ]; then
-            export NO_GAMES=1
-            shift 1
-        elif [ ${1} = ${LONGOPT_NO_GUI} ]; then
+        elif [ "${1}" = "${LONGOPT_NO_GUI}" ]; then
             export NO_GUI=1
             shift 1
-        elif [ ${1} = ${LONGOPT_KEY_RW_TOKEN} ]; then
+        elif [ "${1}" = "${LONGOPT_KEY_RW_TOKEN}" ]; then
             export GITHUB_KEY_RW_TOKEN="${2}"
             shift 2
-        elif [ ${1} = ${LONGOPT_SSH_KEY_PASS} ]; then
+        elif [ "${1}" = "${LONGOPT_SSH_KEY_PASS}" ]; then
             export SSH_KEY_PASS="${2}"
             shift 2
-        elif [ ${1} = ${LONGOPT_MUTT_ACCOUNTS_REMOTE} ]; then
+        elif [ "${1}" = "${LONGOPT_MUTT_ACCOUNTS_REMOTE}" ]; then
             export MUTT_ACCOUNTS_GPG_REMOTE="${2}"
             shift 2
         else
@@ -157,38 +152,36 @@ function init()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
-    source $(dirname "$0")"/apt.sh"
-    source $(dirname "$0")"/bash_setup.sh"
-    source $(dirname "$0")"/bladerf.sh"
-    source $(dirname "$0")"/cargo.sh"
-    source $(dirname "$0")"/deb.sh"
-    source $(dirname "$0")"/device.sh"
-    source $(dirname "$0")"/directories.sh"
-    source $(dirname "$0")"/fonts.sh"
-    source $(dirname "$0")"/git.sh"
-    source $(dirname "$0")"/language_servers.sh"
-    source $(dirname "$0")"/locales.sh"
-    source $(dirname "$0")"/mime.sh"
-    source $(dirname "$0")"/mpd.sh"
-    source $(dirname "$0")"/npm.sh"
-    source $(dirname "$0")"/opt.sh"
-    source $(dirname "$0")"/pip.sh"
-    source $(dirname "$0")"/root.sh"
-    source $(dirname "$0")"/snap.sh"
-    source $(dirname "$0")"/sources.sh"
-    source $(dirname "$0")"/systemd.sh"
+    source $(dirname "$0")"/scripts/directories.sh"
+    source $(dirname "$0")"/scripts/sources.sh"
+    source $(dirname "$0")"/scripts/configs.sh"
+    source $(dirname "$0")"/scripts/apt.sh"
+    source $(dirname "$0")"/scripts/deb.sh"
+    source $(dirname "$0")"/scripts/snap.sh"
+    source $(dirname "$0")"/scripts/flatpak.sh"
+    source $(dirname "$0")"/scripts/npm.sh"
+    source $(dirname "$0")"/scripts/pip.sh"
+    source $(dirname "$0")"/scripts/pipx.sh"
+    source $(dirname "$0")"/scripts/opt.sh"
+    source $(dirname "$0")"/scripts/bladerf.sh"
+    source $(dirname "$0")"/scripts/fonts.sh"
+    source $(dirname "$0")"/scripts/systemd.sh"
+    source $(dirname "$0")"/scripts/mime.sh"
 
     tabs 4
     clear
 
     os_check
     privileges_check
-
-    repo_components_check
-
-    prerequisites_install
 }
 
+function misc_files_install()
+{
+    echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
+
+    bladerf_x40_images_download
+    fonts_install
+}
 
 options_check "$@"
 
@@ -196,56 +189,50 @@ init
 
 directories_create
 
+curl https://sh.rustup.rs -sSf | sh
+mv "${HOME}/.rustup" "${XDG_DATA_HOME}/rustup"
+mv "${HOME}/.cargo" "${XDG_DATA_HOME}/cargo"
+
+if [ -n "${SSH_KEY_PASS}" ]; then
+    ssh-keygen -q -f ~/.ssh/main -N "${SSH_KEY_PASS}"
+    if [ -n "${GITHUB_KEY_RW_TOKEN}" ]; then
+        github_ssh_keys_store
+    fi
+fi
+ssh-add "${HOME}/.ssh/main"
+
+sources_get
+configs_install
+
 locales_setup
 
 apt_setup
 deb_packages_install
 deb_cleanup
 
+sudo apt-get -y purge yt-dlp
+
 snap_packages_install
 
-cargo_crates_install
-
-sudo apt-get purge yt-dlp
+flatpak_remotes_add
+flatpak_packages_install
 
 npm_packages_install
 
+pip_packages_install
+pipx_packages_install
+
 opt_install
 
-ssh-keygen -q -f ~/.ssh/id_rsa -N ${SSH_KEY_PASS}
-
-if [ -n "${GITHUB_KEY_RW_TOKEN}" ]; then
-    github_ssh_keys_store
-
-    eval $(ssh-agent)
-    ssh-add
-fi
-
-sources_get
-build_and_install_from_sources
-
-pip_packages_install
-
-bash_setup
-mpd_setup
-
-bladerf_x40_images_download
-
-fonts_install
-
-device_setup
-
-root_setup
+misc_files_install
 
 systemd_setup
 
 mime_types_setup
 
-language_servers_setup
+device_setup
 
 sudo sensors-detect
-
-sudo wget -P /usr/share/nvim/runtime/spell "https://ftp.nluug.nl/vim/runtime/spell/ru.utf-8.spl"
 
 while [ true ]; do
     read -p "Would you like to reboot your system? [y/n]: "

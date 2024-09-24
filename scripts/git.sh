@@ -9,13 +9,11 @@
 
 
 
-
-
 function github_ssh_keys_store()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
-    SSH_ID_RSA_PUB=$(cat ~/.ssh/id_rsa.pub)
+    SSH_ID_RSA_PUB=$(cat ~/.ssh/main.pub)
 
     curl -X POST -H "Accept: application/vnd.github+json"  \
          -H "Authorization: Bearer ${GITHUB_KEY_RW_TOKEN}" \

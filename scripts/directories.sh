@@ -9,125 +9,57 @@
 
 
 
-if [ ! ${XDG_CONFIG_HOME} ]; then
-    export XDG_CONFIG_HOME="${HOME}/.config"
-fi
-
-if [ ! ${XDG_DATA_HOME} ]; then
-    export XDG_DATA_HOME="${HOME}/.local/share"
-fi
-
-if [ ! ${XDG_STATE_HOME} ]; then
-    export XDG_STATE_HOME="${HOME}/.local/state"
-fi
-
-if [ ! ${XDG_CACHE_HOME} ]; then
-    export XDG_CACHE_HOME="${HOME}/.cache"
-fi
-
-AUDIO_DIR="${HOME}/Audio"
-MUSIC_DIR="${AUDIO_DIR}/Music"
-
-DOCUMENTS_DIR="${HOME}/Documents"
-DOCUMENTS_JOB_DIR="${DOCUMENTS_DIR}/job"
-
-BOOKS_DIR="${DOCUMENTS_DIR}/Books"
-
-OBSIDIAN_DIR="${DOCUMENTS_DIR}/obsidian"
-
-DOWNLOADS_DIR="${HOME}/Downloads"
-TELEGRAM_DOWNLOADS_DIR="${DOWNLOADS_DIR}/Telegram"
-TORRENT_DOWNLOADS_DIR="${DOWNLOADS_DIR}/Torrent"
-
-GAMES_DIR="${HOME}/Games"
-
-export NES_GAMES_DIR="${GAMES_DIR}/NES"
-export SEGA_MEGA_DRIVE_GAMES_DIR="${GAMES_DIR}/SEGA_Mega_Drive"
-export SNES_GAMES_DIR="${GAMES_DIR}/SNES"
-export N64_GAMES_DIR="${GAMES_DIR}/N64"
-export ZXS_GAMES_DIR="${GAMES_DIR}/ZXS"
-export DOS_GAMES_DIR="${GAMES_DIR}/DOS"
-export WINDOWS_GAMES_DIR="${GAMES_DIR}/WIN"
-
-PS_GAMES_DIR="${GAMES_DIR}/PS"
-PS2_GAMES_DIR="${GAMES_DIR}/PS2"
-
-PICTURES_DIR="${HOME}/Pictures"
-ARTWORK_DIR="${PICTURES_DIR}/artwork"
-GIF_DIR="${PICTURES_DIR}/gif"
-PHOTO_DIR="${PICTURES_DIR}/photo"
-SAVED_PICTURES_DIR="${PICTURES_DIR}/saved"
-SCREENSHOTS_DIR="${PICTURES_DIR}/screenshots"
-WALLPAPERS_DIR="${PICTURES_DIR}/wallpapers"
-
-TORRENTS_DIR="${HOME}/Torrents"
-TORRENTS_SERIES_DIR="${TORRENTS_DIR}/series"
-TORRENTS_MUSIC_DIR="${TORRENTS_DIR}/music"
-TORRENTS_MOVIES_DIR="${TORRENTS_DIR}/movies"
-TORRENTS_GAMES_DIR="${TORRENTS_DIR}/games"
-FINISHED_TORRENTS_DIR="${TORRENTS_DIR}/finished"
-
-VIDEO_DIR="${HOME}/Video"
-PERSONAL_VIDEO_DIR="${VIDEO_DIR}/personal"
-SAVED_VIDEO_DIR="${VIDEO_DIR}/saved"
-MOVIES_DIR="${VIDEO_DIR}/movies"
-SERIES_DIR="${VIDEO_DIR}/series"
-SHOTCUT_DIR="${VIDEO_DIR}/shotcut"
-
-WORKSPACE_DIR="${HOME}/workspace"
-WORKSPACE_JOB_DIR="${WORKSPACE_DIR}/job"
-GHIDRA_DIR="${WORKSPACE_DIR}/ghidra"
-ANDROID_STUDIO_SDK_DIR="${WORKSPACE_DIR}/android_studio/sdk"
-ANDROID_STUDIO_PROJECTS_DIR="${WORKSPACE_DIR}/android_studio/projects"
-
-export SRC_DIR="${WORKSPACE_DIR}/src"
-
-VAR_DIR="${WORKSPACE_DIR}/var"
-SAVED_LOGS_DIR="${VAR_DIR}/log"
-
-export IMG_DIR="${VAR_DIR}/img"
-
-BACKUP_DIR="${VAR_DIR}/backup"
-NEOVIM_BACKUP_DIR="${BACKUP_DIR}/nvim"
-
-export POST_INSTALL_BACKUP_DIR="${BACKUP_DIR}/post-install"
-
-LESSHST_DIR="${XDG_STATE_HOME}/less"
-
-NCMPCPP_LYRICS_DIR="${HOME}/.cache/ncmpcpp/lyrics"
-
-
 function directories_create()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
-    echo "Creating home directories..."
+    echo "Creating LXD directories..."
 
-    if [ -d /workspace ]; then
-        echo "/workpace partition exists"
-        sudo chown ${CURRENT_USER}:${CURRENT_USER} /workspace
-        ln -s /workspace "${WORKSPACE_DIR}"
-    fi
+    mkdir -p -v "${LXD_STORAGE_DIR}/Audio" "${LXD_STORAGE_DIR}/Documents" \
+                "${LXD_STORAGE_DIR}/Downloads" "${LXD_STORAGE_DIR}/Torrents" \
+                "${LXD_STORAGE_DIR}/Games" "${LXD_STORAGE_DIR}/Video" \
+                "${LXD_STORAGE_DIR}/Workspace" "${LXD_STORAGE_DIR}/Pictures"
 
-    mkdir -p -v "${AUDIO_DIR}" "${MUSIC_DIR}" "${BOOKS_DIR}"                   \
-                "${DOCUMENTS_DIR}" "${DOCUMENTS_JOB_DIR}" "${DOWNLOADS_DIR}"   \
-                "${TELEGRAM_DOWNLOADS_DIR}" "${TORRENT_DOWNLOADS_DIR}"         \
-                "${GAMES_DIR}" "${NES_GAMES_DIR}"                              \
-                "${SEGA_MEGA_DRIVE_GAMES_DIR}" "${SNES_GAMES_DIR}"             \
-                "${N64_GAMES_DIR}" "${PS_GAMES_DIR}" "${PS2_GAMES_DIR}"        \
-                "${ZXS_GAMES_DIR}" "${DOS_GAMES_DIR}" "${WINDOWS_GAMES_DIR}"   \
-                "${PICTURES_DIR}" "${ARTWORK_DIR}" "${GIF_DIR}" "${PHOTO_DIR}" \
-                "${SAVED_PICTURES_DIR}" "${SCREENSHOTS_DIR}"                   \
-                "${WALLPAPERS_DIR}" "${TORRENTS_DIR}"                          \
-                "${FINISHED_TORRENTS_DIR}" "${VIDEO_DIR}"                      \
-                "${PERSONAL_VIDEO_DIR}" "${MOVIES_DIR}" "${SERIES_DIR}"        \
-                "${WORKSPACE_DIR}" "${WORKSPACE_JOB_DIR}" "${GHIDRA_DIR}"      \
-                "${ANDROID_STUDIO_SDK_DIR}" "${ANDROID_STUDIO_PROJECTS_DIR}"   \
-                "${OBSIDIAN_DIR}" "${SRC_DIR}" "${VAR_DIR}"                    \
-                "${SAVED_LOGS_DIR}" "${IMG_DIR}" "${BACKUP_DIR}"               \
-                "${NEOVIM_BACKUP_DIR}" "${POST_INSTALL_BACKUP_DIR}"            \
-                "${LESSHST_DIR}" "${XDG_CONFIG_HOME}" "${XDG_DATA_HOME}"       \
-                "${XDG_STATE_HOME}" "${XDG_CACHE_HOME}" "${SAVED_VIDEO_DIR}"   \
-                "${NCMPCPP_LYRICS_DIR}" "${SHOTCUT_DIR}"                       \
-                "${TORRENTS_SERIES_DIR}" "${TORRENTS_MUSIC_DIR}"               \
-                "${TORRENTS_MOVIES_DIR}" "${TORRENTS_GAMES_DIR}"
+    ln -s "${LXD_STORAGE_DIR}/Audio" "${LXD_AUDIO_DIR}"
+    ln -s "${LXD_STORAGE_DIR}/Documents" "${LXD_DOCS_DIR}"
+    ln -s "${LXD_STORAGE_DIR}/Downloads" "${LXD_DL_DIR}"
+    ln -s "${LXD_STORAGE_DIR}/Torrents" "${LXD_TORRENTS_DIR}"
+    ln -s "${LXD_STORAGE_DIR}/Games" "${LXD_GAMES_DIR}"
+    ln -s "${LXD_STORAGE_DIR}/Video" "${LXD_VIDEO_DIR}"
+    ln -s "${LXD_STORAGE_DIR}/Workspace" "${LXD_WORKSPACE_DIR}"
+    ln -s "${LXD_STORAGE_DIR}/Pictures" "${LXD_PICTURES_DIR}"
+    ln -s "/opt/${CURRENT_USER}" "${HOME}/.local/opt"
+
+    mkdir -p -v "${LXD_MUSIC_DIR}" "${LXD_AUDIO_REC_DIR}" \
+                "${LXD_PODCASTS_DIR}" "${LXD_VOICE_MSG_DIR}" \
+                "${LXD_SOUNDS_DIR}" "${LXD_JOB_DOCS_DIR}" \
+                "${LXD_OBSIDIAN_VAULTS_DIR}" "${LXD_BOOKS_DIR}" \
+                "${LXD_TELEGRAM_DL_DIR}" "${LXD_TORRENT_DL_DIR}" \
+                "${LXD_MOVIES_TORRENTS_DIR}" "${LXD_SERIES_TORRENTS_DIR}" \
+                "${LXD_MUSIC_TORRENTS_DIR}" "${LXD_BOOKS_TORRENTS_DIR}" \
+                "${LXD_GAMES_TORRENTS_DIR}" "${LXD_NES_GAMES_DIR}" \
+                "${LXD_SEGA_GAMES_DIR}" "${LXD_SNES_GAMES_DIR}" \
+                "${LXD_N64_GAMES_DIR}" "${LXD_PS_GAMES_DIR}" \
+                "${LXD_PS2_GAMES_DIR}" "${LXD_XBOX_GAMES_DIR}" \
+                "${LXD_PS3_GAMES_DIR}" "${LXD_XBOX360_GAMES_DIR}" \
+                "${LXD_ZX_SPECTRUM_GAMES_DIR}" "${LXD_DOS_GAMES_DIR}" \
+                "${LXD_WIN_GAMES_DIR}" "${LXD_SAVED_VIDEOS_DIR}" \
+                "${LXD_PERSONAL_VIDEOS_DIR}" "${LXD_MOVIES_DIR}" \
+                "${LXD_SERIES_DIR}" "${LXD_SHOTCUT_DIR}" \
+                "${LXD_JOB_WORKSPACE_DIR}" "${LXD_GHIDRA_DIR}" \
+                "${LXD_ANDROID_STUDIO_SDK_DIR}" \
+                "${LXD_ANDROID_STUDIO_PROJECTS_DIR}" "${LXD_SRC_DIR}" \
+                "${LXD_VAR_DIR}" "${LXD_LOG_DIR}" "${LXD_IMG_DIR}" \
+                "${LXD_BACKUP_DIR}" "${LXD_ARTWORK_DIR}" "${LXD_GIF_DIR}" \
+                "${LXD_PHOTOS_DIR}" "${LXD_SAVED_PICTURES_DIR}" \
+                "${LXD_SCREENSHOTS_DIR}" "${LXD_WALLPAPER_DIR}" \
+                "${LXD_PIC_ASSETS_DIR}"
+
+    mkdir -p -v "${XDG_DATA_HOME}/gnupg" "${XDG_DATA_HOME}/gradle" \
+                "${XDG_DATA_HOME}/go" "${XDG_DATA_HOME}/android" \
+                "${XDG_DATA_HOME}/electrum" "${XDG_DATA_HOME}/sdkman" \
+                "${XDG_DATA_HOME}/less" "${XDG_CONFIG_HOME}/gtk-2.0" \
+                "${XDG_CONFIG_HOME}/npm" "${XDG_CONFIG_HOME}/subversion" \
+                "${XDG_CONFIG_HOME}/irssi" "${XDG_CONFIG_HOME}/dosbox" \
+                "${XDG_CACHE_HOME}/ncmpcpp/lyrics" "${XDG_CONFIG_HOME}/mutt" \
+                "${XDG_CACHE_HOME}/mpd/playlists" "${HOME}/.local/bin"
 }

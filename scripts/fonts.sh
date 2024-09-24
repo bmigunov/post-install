@@ -12,10 +12,11 @@
 TRUETYPE_FONTS_DIR_PATH="/usr/share/fonts/truetype"
 
 NERD_FONTS_REMOTE=\
-"https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/"
+"https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/"
 declare -a NERD_FONT_ARCHIVES=("3270.zip" "AnonymousPro.zip" "Hack.zip" \
-                               "RobotoMono.zip" "SourceCodePro.zip"     \
-                               "Terminus.zip")
+                               "RobotoMono.zip" "SourceCodePro.zip" \
+                               "Terminus.zip" "Gohu.zip" "JetBrainsMono.zip" \
+                               "Monoid.zip" "ShareTechMono.zip")
 
 
 function nerd_fonts_install()
@@ -40,8 +41,8 @@ function segoe_ui_install()
 {
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
-    sudo mkdir -p $TRUETYPE_FONTS_DIR_PATH/segoe-ui
-    sudo cp "${SRC_DIR}"/mrbvrz/segoe-ui-linux/font/*.ttf $TRUETYPE_FONTS_DIR_PATH/segoe-ui
+    sudo mkdir -p "${TRUETYPE_FONTS_DIR_PATH}/segoe-ui"
+    sudo cp "${LXD_SRC_DIR}"/mrbvrz/segoe-ui-linux/font/*.ttf $TRUETYPE_FONTS_DIR_PATH/segoe-ui
 }
 
 function fonts_install()

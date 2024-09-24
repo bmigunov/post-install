@@ -33,4 +33,18 @@ function locale_add()
 function locales_setup()
 {
     locale_add "${EN_US_UTF8_LOCALE}"
+
+    sudo update-locale LANG=ru_RU.UTF-8
+    sudo update-locale LC_CTYPE=ru_RU.UTF-8
+    sudo update-locale LC_NUMERIC=ru_RU.UTF-8
+    sudo update-locale LC_TIME=ru_RU.UTF-8
+    sudo update-locale LC_MONETARY=ru_RU.UTF-8
+    sudo update-locale LC_COLLATE=ru_RU.UTF-8
+    sudo update-locale LC_MESSAGES=ru_RU.UTF-8
+    sudo update-locale LC_PAPER=ru_RU.UTF-8
+    sudo update-locale LC_NAME=ru_RU.UTF-8
+    sudo update-locale LC_ADDRESS=ru_RU.UTF-8
+    sudo update-locale LC_TELEPHONE=ru_RU.UTF-8
+    sudo update-locale LC_MEASUREMENT=ru_RU.UTF-8
+    sudo update-locale LC_IDENTIFICATION=ru_RU.UTF-8
 }
