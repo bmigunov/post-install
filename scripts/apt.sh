@@ -23,7 +23,7 @@ function apt_keys_add()
     while read -a KEY; do
         echo "Adding repository signing key..."
         wget -qO - "${KEY[0]}" | gpg --dearmor | \
-        sudo tee /etc/apt/trusted.gpg.d/"${KEY[1]}"
+        sudo tee /etc/apt/trusted.gpg.d/"${KEY[1]}" 1&>/dev/null
     done <"${APT_KEYS_LIST_PATH}"
 }
 
