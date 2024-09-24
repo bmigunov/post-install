@@ -23,8 +23,6 @@ function locale_add()
         systemd-cat -p warning -t $0
         echo "Warning! '${1}' locale is not supported"
     else
-        mkdir -p -v ${POST_INSTALL_BACKUP_DIR}/etc
-        cp /etc/locale.gen "${POST_INSTALL_BACKUP_DIR}"/etc
         echo ${1} | sudo tee -a /etc/locale.gen
         sudo locale-gen
     fi

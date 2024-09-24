@@ -36,7 +36,7 @@ function git_repo_clone()
     if [ "${2}" ]; then
         TARGET="${2}"/"${REPO_DIRNAME}"
     else
-        TARGET="${SRC_DIR}"/"${REPO_PARENT_DIRNAME}"/"${REPO_DIRNAME}"
+        TARGET="${LXD_SRC_DIR}"/"${REPO_PARENT_DIRNAME}"/"${REPO_DIRNAME}"
     fi
 
     git clone --recurse-submodules "${1}" "${TARGET}"

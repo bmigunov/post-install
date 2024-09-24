@@ -37,7 +37,7 @@ function device_setup()
             cp --backup=none -rv "${LXD_SRC_DIR}/bmigunov/luxdesk-configs-dell-g3/sparse/home/user/.config" "${HOME}" | \
             systemd-cat -p info -t $0
 
-            cp -rnv "${SRC_DIR}/bmigunov/luxdesk-configs-dell-g3/post-install/"* \
+            cp -rnv "${LXD_SRC_DIR}/bmigunov/luxdesk-configs-dell-g3/post-install/"* \
                     $(dirname "$0")'/..'
             break
             ;;
@@ -46,7 +46,7 @@ function device_setup()
             cp --backup=none -rv "${LXD_SRC_DIR}/bmigunov/luxdesk-configs-ryzen7-desktop/sparse/home/user/.config" "${HOME}" | \
             systemd-cat -p info -t $0
 
-            cp -rnv "${SRC_DIR}/bmigunov/luxdesk-configs-ryzen7-desktop/post-install/"* \
+            cp -rnv "${LXD_SRC_DIR}/bmigunov/luxdesk-configs-ryzen7-desktop/post-install/"* \
                     $(dirname "$0")'/..'
             break
             ;;
