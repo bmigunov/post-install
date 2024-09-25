@@ -19,7 +19,7 @@ function sources_get()
     echo "Getting sources..."
 
     if [ -n "${1}" ]; then
-        PREFIX="${1}"
+        PREFIX="${1}-"
     fi
 
     COMMON_LIST=$(dirname "$0")"/../data/git/${PREFIX}common.list"
