@@ -167,6 +167,7 @@ function init()
     source $(dirname "$0")"/systemd.sh"
     source $(dirname "$0")"/mime.sh"
     source $(dirname "$0")"/device.sh"
+    source $(dirname "$0")"/locales.sh"
 
     tabs 4
     clear
