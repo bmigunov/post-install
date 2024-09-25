@@ -24,6 +24,10 @@ function configs_install()
        "${LXD_SRC_DIR}/bmigunov/luxdesk-configs/sparse/home/user/.config" "${HOME}" | \
        systemd-cat -p info -t $0
 
+    sudo cp --backup=none -rv \
+            "${LXD_SRC_DIR}/bmigunov/luxdesk-configs/sparse/etc/ly" "/etc" | \
+    systemd-cat -p info -t $0
+
     mutt_accounts_obtain
 
     touch "${XDG_CONFIG_HOME}/dosbox/dosbox.conf"
