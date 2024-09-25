@@ -51,7 +51,7 @@ function directories_create()
                 "${LXD_VAR_DIR}" "${LXD_LOG_DIR}" "${LXD_IMG_DIR}" \
                 "${LXD_BACKUP_DIR}" "${LXD_ARTWORK_DIR}" "${LXD_GIF_DIR}" \
                 "${LXD_PHOTOS_DIR}" "${LXD_SAVED_PICTURES_DIR}" \
-                "${LXD_SCREENSHOTS_DIR}" "${LXD_WALLPAPER_DIR}" \
+                "${LXD_SCREENSHOTS_DIR}" "${LXD_WALLPAPERS_DIR}" \
                 "${LXD_PIC_ASSETS_DIR}" "${LXD_STEAMLIB_STORAGE_DIR}"
 
     mkdir -p -v "${XDG_DATA_HOME}/gnupg" "${XDG_DATA_HOME}/gradle" \
