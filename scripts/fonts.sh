@@ -11,29 +11,31 @@
 
 TRUETYPE_FONTS_DIR_PATH="/usr/share/fonts/truetype"
 
-NERD_FONTS_REMOTE=\
-"https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/"
-declare -a NERD_FONT_ARCHIVES=("3270.zip" "AnonymousPro.zip" "Hack.zip" \
-                               "RobotoMono.zip" "SourceCodePro.zip" \
-                               "Terminus.zip" "Gohu.zip" "JetBrainsMono.zip" \
-                               "Monoid.zip" "ShareTechMono.zip")
-
 
 function nerd_fonts_install()
 {
+    NERD_FONTS_REMOTE=\
+    "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/"
+
+    declare -a NERD_FONT_ARCHIVES=("3270.zip" "AnonymousPro.zip" "Hack.zip" \
+                                   "RobotoMono.zip" "SourceCodePro.zip" \
+                                   "Terminus.zip" "Gohu.zip" "JetBrainsMono.zip" \
+                                   "Monoid.zip" "ShareTechMono.zip")
+
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
     echo "Installing Nerd fonts..."
 
-    for (( I=0; I<${#NERD_FONT_ARCHIVES[@]}; I++ )); do
-        NERD_FONT_DIRNAME="${NERD_FONT_ARCHIVES[$I]%.*}"
+    for ARCHIVE in "${NERD_FONT_ARCHIVES[@]}"; do
+        NERD_FONT_DIRNAME="${ARCHIVE%.*}"
+
         sudo mkdir -p -v "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAME}"
 
         sudo wget --content-disposition -P "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAME}" \
-                        "${NERD_FONTS_REMOTE}${NERD_FONT_ARCHIVES[${I}]}"
+                        "${NERD_FONTS_REMOTE}${ARCHIVE}"
 
-        sudo 7z x -tzip -o"${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAME}"                               \
-                  "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAME}/${NERD_FONT_ARCHIVES[${I}]}" && \
-        sudo rm -f "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAME}/${NERD_FONT_ARCHIVES[${I}]}"
+        sudo 7z x -tzip -o"${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAME}" \
+                  "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAME}/${ARCHIVE}" && \
+        sudo rm -f "${TRUETYPE_FONTS_DIR_PATH}/${NERD_FONT_DIRNAME}/${ARCHIVE}"
     done
 }
 
