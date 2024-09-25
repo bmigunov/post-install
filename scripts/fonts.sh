@@ -14,8 +14,7 @@ TRUETYPE_FONTS_DIR_PATH="/usr/share/fonts/truetype"
 
 function nerd_fonts_install()
 {
-    NERD_FONTS_REMOTE=\
-    "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/"
+    NERD_FONTS_REMOTE="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/"
 
     declare -a NERD_FONT_ARCHIVES=("3270.zip" "AnonymousPro.zip" "Hack.zip" \
                                    "RobotoMono.zip" "SourceCodePro.zip" \
@@ -52,7 +51,7 @@ function fonts_install()
     echo "${FUNCNAME}()" | systemd-cat -p debug -t $0
 
     nerd_fonts_install
-    segoe_ui_install
+#     segoe_ui_install
 
-    fc-cache -fv
+#     fc-cache -fv
 }

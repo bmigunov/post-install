@@ -24,12 +24,12 @@ function pipx_packages_install()
     GUI_LIST=$(dirname "$0")"/../data/pipx/${PREFIX}gui.list"
 
     for PACKAGE in $(cat ${COMMON_LIST}); do
-        pip install "${PACKAGE}"
+        pipx install "${PACKAGE}"
     done
 
     if [ "${NO_GUI}" = 0 ]; then
         for PACKAGE in $(cat ${GUI_LIST}); do
-            pip install "${PACKAGE}"
+            pipx install "${PACKAGE}"
         done
     fi
 }
