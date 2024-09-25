@@ -201,6 +201,9 @@ if [ -n "${SSH_KEY_PASS}" ]; then
 fi
 ssh-add "${HOME}/.ssh/main"
 
+curl -s "https://get.sdkman.io" | bash
+rm -v "${HOME}/.zshrc"
+
 sources_get
 configs_install
 
@@ -213,6 +216,7 @@ deb_cleanup
 sudo apt-get -y purge yt-dlp
 
 snap_packages_install
+sudo snap install --beta --classic zig
 
 flatpak_remotes_add
 flatpak_packages_install

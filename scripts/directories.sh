@@ -56,10 +56,10 @@ function directories_create()
 
     mkdir -p -v "${XDG_DATA_HOME}/gnupg" "${XDG_DATA_HOME}/gradle" \
                 "${XDG_DATA_HOME}/go" "${XDG_DATA_HOME}/android" \
-                "${XDG_DATA_HOME}/electrum" "${XDG_DATA_HOME}/sdkman" \
-                "${XDG_DATA_HOME}/less" "${XDG_CONFIG_HOME}/gtk-2.0" \
-                "${XDG_CONFIG_HOME}/npm" "${XDG_CONFIG_HOME}/subversion" \
-                "${XDG_CONFIG_HOME}/irssi" "${XDG_CONFIG_HOME}/dosbox" \
-                "${XDG_CACHE_HOME}/ncmpcpp/lyrics" "${XDG_CONFIG_HOME}/mutt" \
-                "${XDG_CACHE_HOME}/mpd/playlists" "${HOME}/.local/bin"
+                "${XDG_DATA_HOME}/electrum" "${XDG_DATA_HOME}/less" \
+		"${XDG_CONFIG_HOME}/gtk-2.0" "${XDG_CONFIG_HOME}/npm" \
+		"${XDG_CONFIG_HOME}/subversion" "${XDG_CONFIG_HOME}/irssi" \
+		"${XDG_CONFIG_HOME}/dosbox" "${XDG_CACHE_HOME}/ncmpcpp/lyrics" \
+		"${XDG_CONFIG_HOME}/mutt" "${XDG_CACHE_HOME}/mpd/playlists" \
+		"${HOME}/.local/bin"
 }
