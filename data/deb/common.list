@@ -80,6 +80,7 @@ libusb-1.0-0-dev
 libudev-dev
 doxygen
 clang
+clangd
 libxkbcommon-dev
 meson
 autoconf-archive
@@ -171,3 +172,4 @@ liblz4-dev
 libgtk-3-dev
 libdbusmenu-gtk3-dev
 libgtk-layer-shell-dev
+shellcheck

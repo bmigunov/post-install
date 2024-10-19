@@ -239,6 +239,8 @@ device_setup
 sudo update-alternatives --set java \
                          /usr/lib/jvm/temurin-21-jdk-amd64/bin/java
 
+rustup component add rust-src
+
 sudo sensors-detect
 
 while [ true ]; do
