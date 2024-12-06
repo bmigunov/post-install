@@ -1,9 +1,13 @@
 git@github.com:NationalSecurityAgency/ghidra.git https://github.com/NationalSecurityAgency/ghidra.git
 git@github.com:mrbvrz/segoe-ui-linux.git https://github.com/mrbvrz/segoe-ui-linux.git
-git@github.com:elkowar/eww.git https://github.com/elkowar/eww.git
 git@github.com:Gustash/Hyprshot.git https://github.com/Gustash/Hyprshot.git
 git@github.com:hyprwm/hypridle.git https://github.com/hyprwm/hypridle.git
 git@github.com:hyprwm/hyprlock.git https://github.com/hyprwm/hyprlock.git
 git@github.com:hyprwm/hyprpicker.git https://github.com/hyprwm/hyprpicker.git
 git@github.com:LGFae/swww.git https://github.com/LGFae/swww.git
 git@github.com:zed-industries/zed.git https://github.com/zed-industries/zed.git
+- https://git.sr.ht/~leon_plickat/wayneko
+git@github.com:hyprwm/hyprpolkitagent.git https://github.com/hyprwm/hyprpolkitagent.git
+git@github.com:hyprwm/aquamarine.git https://github.com/hyprwm/aquamarine.git
+git@github.com:hyprwm/Hyprland.git https://github.com/hyprwm/Hyprland.git
+git@github.com:hyprwm/hyprutils.git https://github.com/hyprwm/hyprutils.git
